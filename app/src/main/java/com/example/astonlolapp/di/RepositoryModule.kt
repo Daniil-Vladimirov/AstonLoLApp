@@ -1,6 +1,5 @@
 package com.example.astonlolapp.di
 
-import android.content.Context
 import com.example.astonlolapp.data.repository.Repository
 import com.example.astonlolapp.domain.use_cases.UseCases
 import com.example.astonlolapp.domain.use_cases.get_all_heroes.GetAllHeroesUseCase
@@ -9,7 +8,6 @@ import com.example.astonlolapp.domain.use_cases.search_heroes.SearchHeroesUseCas
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
