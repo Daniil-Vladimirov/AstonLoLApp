@@ -1,0 +1,52 @@
+package com.example.astonlolapp.data.repository
+
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.example.astonlolapp.data.local.HeroDatabase
+import com.example.astonlolapp.data.paging_source.HeroRemoteMediator
+import com.example.astonlolapp.data.paging_source.SearchHeroSource
+import com.example.astonlolapp.data.remote.HeroApi
+import com.example.astonlolapp.domain.model.Hero
+import com.example.astonlolapp.domain.repository.RemoteDatasourceAbs
+import com.example.astonlolapp.util.Constants.ITEMS_PAGE_SIZE
+import kotlinx.coroutines.flow.Flow
+
+@OptIn(ExperimentalPagingApi::class)
+class RemoteDataSourceImpl
+    (
+    private val heroApi: HeroApi,
+    private val heroDatabase: HeroDatabase
+) : RemoteDatasourceAbs {
+
+    private val heroDao = heroDatabase.heroDao()
+
+
+    override fun getAllHeroes(): Flow<PagingData<Hero>> {
+        val pagerFactory = { heroDao.getAllHeroes() }
+
+        return Pager(
+            config = PagingConfig(pageSize = ITEMS_PAGE_SIZE),
+            pagingSourceFactory = pagerFactory,
+            remoteMediator = HeroRemoteMediator(
+                heroApi = heroApi,
+                heroDatabase = heroDatabase
+            )
+        ).flow
+    }
+
+    override fun searchHeroes(query: String): Flow<PagingData<Hero>> {
+        return Pager(
+            config = PagingConfig(pageSize = ITEMS_PAGE_SIZE),
+            pagingSourceFactory = {
+                SearchHeroSource(
+                    heroApi = heroApi,
+                    searchQuery = query
+                )
+            }
+        ).flow
+
+    }
+
+}
