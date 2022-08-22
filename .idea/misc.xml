@@ -5,12 +5,13 @@
       <map>
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1405" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2255" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/drawable/ic_sad.xml" value="0.137" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/drawable/ic_sword_background.xml" value="0.2085" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/drawable/splash_gradient.xml" value="0.25" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/activity_main.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.23731884057971014" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/fragment_first.xml" value="0.29846014492753625" />
-        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/fragment_list_screen.xml" value="0.36096014492753625" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/fragment_list_screen.xml" value="0.16" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/hero_list_element.xml" value="0.33" />
       </map>
     </option>

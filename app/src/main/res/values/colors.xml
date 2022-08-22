@@ -17,4 +17,10 @@
     <color name="yellow">#FFC114</color>
     <color name="green">#00C980</color>
     <color name="blue">#0077b6</color>
+
+
+    <color name="backgroundColor">@color/lightGray</color>
+    <color name="placeholderColor">@color/mediumGray</color>
+    <color name="itemColor">@color/darker</color>
+
 </resources>
