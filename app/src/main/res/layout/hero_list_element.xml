@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="result"
+            type="com.example.astonlolapp.domain.model.Hero" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
