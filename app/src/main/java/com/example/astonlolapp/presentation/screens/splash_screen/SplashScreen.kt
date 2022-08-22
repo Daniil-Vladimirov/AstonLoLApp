@@ -1,4 +1,4 @@
-package com.example.astonlolapp.presentation.splash_screen
+package com.example.astonlolapp.presentation.screens.splash_screen
 
 import android.annotation.SuppressLint
 import android.content.Intent
