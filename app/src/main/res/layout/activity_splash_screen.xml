@@ -5,17 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    tools:context=".SplashScreen">
+    android:background="@drawable/splash_gradient"
+    tools:context=".presentation.splash_screen.SplashScreen">
 
     <!--THIS IS IMAGEVIEW FOR OUR IMAGE IN SPLASH SCREEN-->
     <!--YOU CAN ADD YOUR IMAGE TO DRAWABLES.
         HERE geeksforgeeks IS THE NAME OF IMAGE-->
     <ImageView
         android:id="@+id/SplashScreenImage"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:src="@drawable/pngegg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:contentDescription="@string/app_logo"
+        android:layout_marginHorizontal="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/drawable/splash_gradient.xml" value="0.25" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/activity_main.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.23731884057971014" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/fragment_first.xml" value="0.29846014492753625" />

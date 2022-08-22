@@ -1,13 +1,18 @@
-package com.example.astonlolapp
+package com.example.astonlolapp.presentation.splash_screen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.astonlolapp.MainActivity
+import com.example.astonlolapp.R
 
+@SuppressLint("CustomSplashScreen")
 @Suppress("DEPRECATION")
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,12 +29,12 @@ class SplashScreen : AppCompatActivity() {
         // HERE WE ARE TAKING THE REFERENCE OF OUR IMAGE
         // SO THAT WE CAN PERFORM ANIMATION USING THAT IMAGE
         val backgroundImage: ImageView = findViewById(R.id.SplashScreenImage)
-        val slideAnimation = AnimationUtils.loadAnimation(this, R.anim.side_slide)
+        val slideAnimation = AnimationUtils.loadAnimation(this, R.anim.top_slide)
         backgroundImage.startAnimation(slideAnimation)
 
         // we used the postDelayed(Runnable, time) method
         // to send a message with a delayed time.
-        Handler().postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
