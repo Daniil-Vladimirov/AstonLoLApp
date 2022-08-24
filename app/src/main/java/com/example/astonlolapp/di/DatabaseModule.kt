@@ -19,18 +19,25 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): HeroDatabase {
+    fun provideDatabase(
+        @ApplicationContext context: Context
+    ): HeroDatabase {
         return Room.databaseBuilder(
             context,
             HeroDatabase::class.java,
             HERO_DATABASE
-        ).build()
+        )
+            .build()
     }
 
     @Provides
     @Singleton
-    fun provideLocalDataSource(heroDatabase: HeroDatabase): LocalDatasourceAbs {
-        return LocalDataSourceImp(dataBase = heroDatabase)
+    fun provideLocalDataSource(
+        database: HeroDatabase
+    ): LocalDatasourceAbs {
+        return LocalDataSourceImp(
+            dataBase = database
+        )
     }
 
 }

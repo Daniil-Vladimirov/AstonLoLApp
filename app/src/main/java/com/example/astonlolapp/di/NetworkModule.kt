@@ -1,5 +1,6 @@
 package com.example.astonlolapp.di
 
+import androidx.paging.ExperimentalPagingApi
 import com.example.astonlolapp.data.local.HeroDatabase
 import com.example.astonlolapp.data.remote.HeroApi
 import com.example.astonlolapp.data.repository.RemoteDataSourceImpl
@@ -18,6 +19,7 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+@OptIn(ExperimentalPagingApi::class)
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -49,6 +51,7 @@ object NetworkModule {
         return retrofit.create(HeroApi::class.java)
     }
 
+
     @Provides
     @Singleton
     fun provideRemoteDatasource(
@@ -56,8 +59,8 @@ object NetworkModule {
         heroDatabase: HeroDatabase
     ): RemoteDatasourceAbs {
         return RemoteDataSourceImpl(
-            heroDatabase = heroDatabase,
-            heroApi = heroApi
+            heroApi = heroApi,
+            heroDatabase =heroDatabase
         )
     }
 }

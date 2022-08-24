@@ -1,6 +1,6 @@
 package com.example.astonlolapp.data.paging_source
 
-import android.util.Log
+
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -9,133 +9,111 @@ import androidx.room.withTransaction
 import com.example.astonlolapp.data.local.HeroDatabase
 import com.example.astonlolapp.data.remote.HeroApi
 import com.example.astonlolapp.domain.model.Hero
-import com.example.astonlolapp.domain.model.HeroRemoteKey
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.astonlolapp.domain.model.HeroRemoteKeys
+import timber.log.Timber
 import javax.inject.Inject
 
-@OptIn(ExperimentalPagingApi::class)
+@ExperimentalPagingApi
 class HeroRemoteMediator @Inject constructor(
-    val heroApi: HeroApi,
-    val heroDatabase: HeroDatabase
+    private val heroApi: HeroApi,
+    private val heroDatabase: HeroDatabase
 ) : RemoteMediator<Int, Hero>() {
 
     private val heroDao = heroDatabase.heroDao()
-    private val heroRemoteKeyDao = heroDatabase.heroRemoteKeyDao()
+    private val heroRemoteKeysDao = heroDatabase.heroRemoteKeyDao()
 
     override suspend fun initialize(): InitializeAction {
-        val maxTimeout = 1440
         val currentTime = System.currentTimeMillis()
-        val lastUpdate = heroRemoteKeyDao.getRemoteKey(1)?.lastUpdate ?: 0L
-        val timePassed = (currentTime - lastUpdate) / 1000 / 60
-        return if (timePassed <= maxTimeout) {
-            Log.d("HeroRemoteMediator", parseMillis(currentTime))
-            Log.d("HeroRemoteMediator", parseMillis(lastUpdate))
-            Log.d("HeroRemoteMediator", "Up to date")
-            InitializeAction.SKIP_INITIAL_REFRESH
+        val lastUpdated = heroRemoteKeysDao.getRemoteKeys(heroId = 1)?.lastUpdated ?: 0L
+        val cacheTimeout = 1440
 
+        val diffInMinutes = (currentTime - lastUpdated) / 1000 / 60
+        return if (diffInMinutes.toInt() <= cacheTimeout) {
+            InitializeAction.SKIP_INITIAL_REFRESH
         } else {
-            Log.d("HeroRemoteMediator", parseMillis(currentTime))
-            Log.d("HeroRemoteMediator", parseMillis(lastUpdate))
-            Log.d("HeroRemoteMediator", "Refresh")
             InitializeAction.LAUNCH_INITIAL_REFRESH
         }
     }
 
-    override suspend fun load(
-        loadType: LoadType,
-        state: PagingState<Int, Hero>
-    ): RemoteMediator.MediatorResult {
-
+    override suspend fun load(loadType: LoadType, state: PagingState<Int, Hero>): MediatorResult {
         return try {
-
             val page = when (loadType) {
                 LoadType.REFRESH -> {
-                    val remoteKeys = getRemoteKeysClosestToCurrentPosition(state)
+                    val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
                     remoteKeys?.nextPage?.minus(1) ?: 1
                 }
                 LoadType.PREPEND -> {
-                    val remoteKeys = getRemoteKeysForFirstItem(state)
+                    val remoteKeys = getRemoteKeyForFirstItem(state)
                     val prevPage = remoteKeys?.prevPage
                         ?: return MediatorResult.Success(
                             endOfPaginationReached = remoteKeys != null
                         )
                     prevPage
-
                 }
                 LoadType.APPEND -> {
-                    val remoteKey = getRemoteKeyForLastItem(state)
-                    val nextPage = remoteKey?.nextPage ?: return MediatorResult.Success(
-                        endOfPaginationReached = remoteKey != null
-                    )
+                    val remoteKeys = getRemoteKeyForLastItem(state)
+                    val nextPage = remoteKeys?.nextPage
+                        ?: return MediatorResult.Success(
+                            endOfPaginationReached = remoteKeys != null
+                        )
                     nextPage
                 }
             }
 
             val response = heroApi.getAllHeroes(page = page)
             if (response.heroes.isNotEmpty()) {
-
                 heroDatabase.withTransaction {
                     if (loadType == LoadType.REFRESH) {
                         heroDao.deleteAllHeroes()
-                        heroRemoteKeyDao.deleteAllRemoteKeys()
+                        heroRemoteKeysDao.deleteAllRemoteKeys()
                     }
                     val prevPage = response.prevPage
                     val nextPage = response.nextPage
-                    val lastUpdate = response.lastUpdate
-
-                    val remoteKeys = response.heroes.map { hero ->
-                        HeroRemoteKey(
+                    val keys = response.heroes.map { hero ->
+                        HeroRemoteKeys(
                             id = hero.id,
                             prevPage = prevPage,
                             nextPage = nextPage,
-                            lastUpdate = lastUpdate
+                            lastUpdated = response.lastUpdated
                         )
+
                     }
-                    heroRemoteKeyDao.addRemoteKeys(heroRemoteKeys = remoteKeys)
-                    heroDao.insertHeroes(heroes = response.heroes)
-
+                    Timber.d("${keys[0]}")
+                    heroRemoteKeysDao.addAllRemoteKeys(heroRemoteKeys = keys)
+                    heroDao.addHeroes(heroes = response.heroes)
                 }
-
             }
-            MediatorResult.Success(
-                endOfPaginationReached = response.nextPage == null
-            )
-
+            MediatorResult.Success(endOfPaginationReached = response.nextPage == null)
         } catch (e: Exception) {
             return MediatorResult.Error(e)
         }
     }
 
-
-    private suspend fun getRemoteKeysClosestToCurrentPosition(state: PagingState<Int, Hero>): HeroRemoteKey? {
+    private suspend fun getRemoteKeyClosestToCurrentPosition(
+        state: PagingState<Int, Hero>
+    ): HeroRemoteKeys? {
         return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.id?.let { heroId ->
-                heroRemoteKeyDao.getRemoteKey(heroId)
+            state.closestItemToPosition(position)?.id?.let { id ->
+                heroRemoteKeysDao.getRemoteKeys(heroId = id)
             }
         }
     }
 
-    private suspend fun getRemoteKeysForFirstItem(state: PagingState<Int, Hero>): HeroRemoteKey? {
-        val firstPage = state.pages.firstOrNull()
-        val firstRemoteKey =
-            if (firstPage?.data?.isNotEmpty() == true) {
-                firstPage.data.firstOrNull()?.let { hero ->
-                    heroRemoteKeyDao.getRemoteKey(heroId = hero.id)
-                }
-            } else null
-        return firstRemoteKey
+    private suspend fun getRemoteKeyForFirstItem(
+        state: PagingState<Int, Hero>
+    ): HeroRemoteKeys? {
+        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
+            ?.let { hero ->
+                heroRemoteKeysDao.getRemoteKeys(heroId = hero.id)
+            }
     }
 
-    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Hero>): HeroRemoteKey? {
-        return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { hero ->
-            heroRemoteKeyDao.getRemoteKey(heroId = hero.id)
-        }
-    }
-
-    private fun parseMillis(time: Long): String {
-        val date = Date(time)
-        val format = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.ROOT)
-        return format.format(date)
+    private suspend fun getRemoteKeyForLastItem(
+        state: PagingState<Int, Hero>
+    ): HeroRemoteKeys? {
+        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
+            ?.let { hero ->
+                heroRemoteKeysDao.getRemoteKeys(heroId = hero.id)
+            }
     }
 }

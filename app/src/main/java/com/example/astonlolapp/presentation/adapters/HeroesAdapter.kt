@@ -2,52 +2,61 @@ package com.example.astonlolapp.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.astonlolapp.R
 import com.example.astonlolapp.databinding.HeroListElementBinding
 import com.example.astonlolapp.domain.model.Hero
-import com.example.astonlolapp.util.HeroDiffUtil
+import timber.log.Timber
 
-class HeroesAdapter : RecyclerView.Adapter<HeroesAdapter.MyViewHolder>() {
+class HeroAdapter : PagingDataAdapter<Hero, HeroAdapter.Holder>(UsersDiffCallback()) {
 
-    private var heroes = emptyList<Hero>()
-
-    class MyViewHolder(private val binding: HeroListElementBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(result: Hero){
-            binding.result = result
-            binding.executePendingBindings()
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+        Timber.d("onBindingViewHolder is called")
+        val hero = getItem(position) ?: return
+        with(holder.binding) {
+            heroNameTextView.text = hero.name
+            heroDescriptionTextView.text = hero.about
+            adTextView.text = hero.ad.toString()
+            apTextView.text = hero.ap.toString()
+            winRateTextView.text = hero.winRate.toString()
+            loadHeroImage(heroImageView, hero.image)
         }
+    }
 
-        companion object {
-            fun from(parent: ViewGroup): MyViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = HeroListElementBinding.inflate(layoutInflater, parent, false)
-                return MyViewHolder(binding)
-            }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        Timber.d("onCreateViewHolder is called")
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = HeroListElementBinding.inflate(inflater, parent, false)
+        return Holder(binding)
+    }
+
+    private fun loadHeroImage(imageView: ImageView, url: String) {
+        Timber.d("LoadImage is called")
+        imageView.load(url) {
+            // placeholder image is the image used
+            // when our image url fails to load.
+            placeholder(R.drawable.ic_error_placeholder)
         }
-
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder.from(parent)
+    class Holder(
+        val binding: HeroListElementBinding
+    ) : RecyclerView.ViewHolder(binding.root)
+
+}
+
+// ---
+
+class UsersDiffCallback : DiffUtil.ItemCallback<Hero>() {
+    override fun areItemsTheSame(oldItem: Hero, newItem: Hero): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentRecipe = heroes[position]
-        holder.bind(currentRecipe)
-    }
-
-    override fun getItemCount(): Int {
-        return heroes.size
-    }
-
-    fun setData(newData: List<Hero>){
-        val recipesDiffUtil =
-            HeroDiffUtil(heroes, newData)
-        val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
-        heroes = newData
-        diffUtilResult.dispatchUpdatesTo(this)
+    override fun areContentsTheSame(oldItem: Hero, newItem: Hero): Boolean {
+        return oldItem == newItem
     }
 }

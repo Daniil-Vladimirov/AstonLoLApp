@@ -13,7 +13,7 @@ import com.example.astonlolapp.domain.repository.RemoteDatasourceAbs
 import com.example.astonlolapp.util.Constants.ITEMS_PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 
-@OptIn(ExperimentalPagingApi::class)
+@ExperimentalPagingApi
 class RemoteDataSourceImpl
     (
     private val heroApi: HeroApi,

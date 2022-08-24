@@ -9,6 +9,6 @@ class LocalDataSourceImp(dataBase: HeroDatabase) : LocalDatasourceAbs {
     private val heroDao = dataBase.heroDao()
 
     override suspend fun getSelectedHero(heroId: Int): Hero {
-        return heroDao.searchHero(heroId = heroId)
+        return heroDao.getSelectedHero(heroId = heroId)
     }
 }

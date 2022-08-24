@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Entity(tableName = HERO_DATABASE_TABLE)
 data class Hero(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val name: String,
     val image: String,

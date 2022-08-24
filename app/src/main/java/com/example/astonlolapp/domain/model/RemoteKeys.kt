@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 import com.example.astonlolapp.util.Constants.REMOTE_KEYS_TABLE
 
 @Entity(tableName = REMOTE_KEYS_TABLE)
-data class HeroRemoteKey(
-    @PrimaryKey
+data class HeroRemoteKeys(
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val prevPage: Int?,
     val nextPage: Int?,
-    val lastUpdate: Long?
+    val lastUpdated: Long?
 )
