@@ -4,20 +4,17 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.astonlolapp.data.remote.HeroApi
 import com.example.astonlolapp.domain.model.Hero
-import javax.inject.Inject
 
-class SearchHeroSource @Inject constructor(
+class SearchHeroSource(
     private val heroApi: HeroApi,
-    private val searchQuery: String
+    private val query: String
 ) : PagingSource<Int, Hero>() {
 
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Hero> {
-
-        try {
-            val apiResponse = heroApi.searchHeroes(searchQuery)
+        return try {
+            val apiResponse = heroApi.searchHeroes(name = query)
             val heroes = apiResponse.heroes
-            return if (heroes.isNotEmpty()) {
+            if (heroes.isNotEmpty()) {
                 LoadResult.Page(
                     data = heroes,
                     prevKey = apiResponse.prevPage,
@@ -31,7 +28,7 @@ class SearchHeroSource @Inject constructor(
                 )
             }
         } catch (e: Exception) {
-            return LoadResult.Error(e)
+            LoadResult.Error(e)
         }
     }
 

@@ -27,7 +27,10 @@ class RemoteDataSourceImpl
         val pagerFactory = { heroDao.getAllHeroes() }
 
         return Pager(
-            config = PagingConfig(pageSize = ITEMS_PAGE_SIZE),
+            config = PagingConfig(
+                pageSize = ITEMS_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
             pagingSourceFactory = pagerFactory,
             remoteMediator = HeroRemoteMediator(
                 heroApi = heroApi,
@@ -38,11 +41,14 @@ class RemoteDataSourceImpl
 
     override fun searchHeroes(query: String): Flow<PagingData<Hero>> {
         return Pager(
-            config = PagingConfig(pageSize = ITEMS_PAGE_SIZE),
+            config = PagingConfig(
+                pageSize = ITEMS_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
             pagingSourceFactory = {
                 SearchHeroSource(
                     heroApi = heroApi,
-                    searchQuery = query
+                    query = query
                 )
             }
         ).flow
