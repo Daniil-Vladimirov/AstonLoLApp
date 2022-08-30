@@ -1,52 +1,65 @@
 package com.example.astonlolapp.presentation.screens.list_screen
 
+import HeroesPagingAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.astonlolapp.data.remote.HeroApi
-import com.example.astonlolapp.data.repository.RemoteDataSourceImpl
 import com.example.astonlolapp.databinding.FragmentListScreenBinding
 import com.example.astonlolapp.domain.model.Hero
-import com.example.astonlolapp.domain.repository.RemoteDatasourceAbs
-import com.example.astonlolapp.presentation.adapters.DefaultLoadStateAdapter
-import com.example.astonlolapp.presentation.adapters.HeroAdapter
-import com.example.astonlolapp.presentation.adapters.TryAgainAction
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.android.awaitFrame
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class ListScreenFragment :
     Fragment() {
 
+
     private var _binding: FragmentListScreenBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var heroes: Flow<PagingData<Hero>>
+    private lateinit var heroAdapter: HeroesPagingAdapter
+
     private val listScreenViewModel by viewModels<ListScreenViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        //Timber.tag("ListFragment").d("onCreate")
+        super.onCreate(savedInstanceState)
+        heroes = listScreenViewModel.allHeroes
+    }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Timber.tag("ListFragment").d("onCreateView")
         // Inflate the layout for this fragment
         _binding = FragmentListScreenBinding.inflate(inflater, container, false)
 
-        setupHeroList()
+        heroAdapter = HeroesPagingAdapter()
+
+        setupRecyclerView(heroAdapter)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                heroes.collectLatest {
+                    heroAdapter.submitData(it)
+                }
+            }
+        }
+
         return binding.root
     }
 
@@ -55,33 +68,14 @@ class ListScreenFragment :
         _binding = null
     }
 
-    private fun setupHeroList() {
-        val adapter = HeroAdapter()
-        val tryAgainAction: TryAgainAction = { adapter.retry() }
-        val footerAdapter = DefaultLoadStateAdapter(tryAgainAction)
-        val adapterWithLoadState = adapter.withLoadStateFooter(footerAdapter)
 
-        binding.recyclerview.layoutManager = LinearLayoutManager(context)
-        binding.recyclerview.adapter = adapterWithLoadState
-        (binding.recyclerview.itemAnimator as? DefaultItemAnimator)?.supportsChangeAnimations =
-            false
-
-        observeHeroes(adapter)
-
-
-    }
-
-
-    private fun observeHeroes(adapter: HeroAdapter) {
-        Timber.d("observeHeroes is called")
-        lifecycleScope.launch {
-            listScreenViewModel.allHeroes.collectLatest { hero ->
-                adapter.submitData(hero)
-
-            }
-        }
+    private fun setupRecyclerView(heroAdapter: HeroesPagingAdapter) {
+        binding.recyclerview.adapter = heroAdapter
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
     }
 }
+
+
 
 
 

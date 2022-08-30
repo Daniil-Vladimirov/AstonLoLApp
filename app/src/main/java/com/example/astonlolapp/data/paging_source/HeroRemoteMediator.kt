@@ -1,6 +1,7 @@
 package com.example.astonlolapp.data.paging_source
 
 import android.util.Log
+import android.util.Log.d
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -10,12 +11,14 @@ import com.example.astonlolapp.data.local.HeroDatabase
 import com.example.astonlolapp.data.remote.HeroApi
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.model.HeroRemoteKeys
+import timber.log.Timber
+import timber.log.Timber.Forest.d
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 @OptIn(ExperimentalPagingApi::class)
-class HeroRemoteMediator (
+class HeroRemoteMediator(
     private val heroApi: HeroApi,
     private val heroDatabase: HeroDatabase
 ) : RemoteMediator<Int, Hero>() {
@@ -29,7 +32,9 @@ class HeroRemoteMediator (
         val lastUpdate = remoteKeyDao.getRemoteKeys(1)?.lastUpdated ?: 0L
         val timePassed = (currentTime - lastUpdate) / 1000 / 60
         return if (timePassed <= maxTimeout) {
+
             InitializeAction.SKIP_INITIAL_REFRESH
+
         } else {
 
             InitializeAction.LAUNCH_INITIAL_REFRESH
@@ -47,6 +52,7 @@ class HeroRemoteMediator (
                 LoadType.REFRESH -> {
                     val remoteKeys = getRemoteKeysClosestToCurrentPosition(state)
                     remoteKeys?.nextPage?.minus(1) ?: 1
+
                 }
                 LoadType.PREPEND -> {
                     val remoteKeys = getRemoteKeysForFirstItem(state)
@@ -70,7 +76,7 @@ class HeroRemoteMediator (
 
             val response = heroApi.getAllHeroes(page = page)
             if (response.heroes.isNotEmpty()) {
-
+                Timber.tag("RemoteMediator").d("heroes are not empty")
                 heroDatabase.withTransaction {
                     if (loadType == LoadType.REFRESH) {
                         heroDao.deleteAllHeroes()
@@ -88,8 +94,9 @@ class HeroRemoteMediator (
                             lastUpdated = lastUpdate
                         )
                     }
-                    remoteKeyDao
+                    remoteKeyDao.addAllRemoteKeys(heroRemoteKeys = remoteKeys)
                     heroDao.addHeroes(heroes = response.heroes)
+
 
                 }
 
@@ -99,7 +106,9 @@ class HeroRemoteMediator (
             )
 
         } catch (e: Exception) {
+            Timber.d(e)
             return MediatorResult.Error(e)
+
         }
     }
 
@@ -126,8 +135,8 @@ class HeroRemoteMediator (
     }
 
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Hero>): HeroRemoteKeys? {
-        return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { hero ->
-            remoteKeyDao.getRemoteKeys(heroId = hero.id)
+        return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { train ->
+            remoteKeyDao.getRemoteKeys(heroId = train.id)
         }
     }
 

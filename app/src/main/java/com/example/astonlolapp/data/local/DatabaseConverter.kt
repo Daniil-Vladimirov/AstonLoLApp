@@ -1,26 +1,24 @@
 package com.example.astonlolapp.data.local
 
 import androidx.room.TypeConverter
-import java.lang.StringBuilder
 
 class DatabaseConverter {
-
 
     private val separator = ","
 
     @TypeConverter
-    fun convertListToString(list: List<String>): String {
-        val stringBuilder = StringBuilder()
-        for (item in list) {
+    fun convertListToString(listOfStrings: List<String>): String {
+        val stringBuilder = StringBuffer()
+        for (item in listOfStrings) {
             stringBuilder.append(item).append(separator)
         }
-
-        stringBuilder.setLength(stringBuilder.length - separator.length)
+        stringBuilder.setLength(stringBuilder.length - separator.length+1)
         return stringBuilder.toString()
+
     }
 
     @TypeConverter
-    fun convertStringToList(string: String): List<String> {
+    fun convertStingToList(string: String): List<String> {
         return string.split(separator)
     }
 }

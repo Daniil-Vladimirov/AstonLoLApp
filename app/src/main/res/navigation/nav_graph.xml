@@ -7,5 +7,6 @@
     <fragment
         android:id="@+id/listScreenFragment"
         android:name="com.example.astonlolapp.presentation.screens.list_screen.ListScreenFragment"
-        android:label="ListScreenFragment" />
+        android:label="fragment_list_screen"
+        tools:layout="@layout/fragment_list_screen" />
 </navigation>

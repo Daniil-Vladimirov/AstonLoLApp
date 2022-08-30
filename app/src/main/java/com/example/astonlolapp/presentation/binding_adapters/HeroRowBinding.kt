@@ -1,6 +1,10 @@
 package com.example.astonlolapp.presentation.binding_adapters
 
-/*
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import coil.load
+import com.example.astonlolapp.R
+
 class HeroRowBinding {
 
     companion object{
@@ -15,4 +19,4 @@ class HeroRowBinding {
         }
 
     }
-}*/
+}
