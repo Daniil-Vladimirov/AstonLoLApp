@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.astonlolapp.MainActivity
 import com.example.astonlolapp.R
 
-/*
 @SuppressLint("CustomSplashScreen")
 @Suppress("DEPRECATION")
 class SplashScreen : AppCompatActivity() {
@@ -42,4 +41,3 @@ class SplashScreen : AppCompatActivity() {
         }, 3000) // 3000 is the delayed time in milliseconds.
     }
 }
-*/

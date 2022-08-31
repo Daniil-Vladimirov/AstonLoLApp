@@ -6,7 +6,8 @@ import com.example.astonlolapp.databinding.HeroListElementBinding
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.presentation.adapters.HeroViewHolder
 
-class HeroesPagingAdapter :  PagingDataAdapter<Hero, HeroViewHolder>(HERO_DIFF_CALLBACK) {
+class HeroesPagingAdapter() :
+    PagingDataAdapter<Hero, HeroViewHolder>(HERO_DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroViewHolder =
         HeroViewHolder(

@@ -1,20 +1,21 @@
 package com.example.astonlolapp.presentation.adapters
 
-import android.os.Build.VERSION_CODES.BASE
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.transform.CircleCropTransformation
-import com.example.astonlolapp.R
 import com.example.astonlolapp.databinding.HeroListElementBinding
 import com.example.astonlolapp.domain.model.Hero
+import com.example.astonlolapp.presentation.screens.list_screen.ListScreenFragmentDirections
 import com.example.astonlolapp.util.Constants.BASE_URL
-import timber.log.Timber
 
 class HeroViewHolder(
-    private val binding: HeroListElementBinding
+    private val binding: HeroListElementBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    private var currentHero: Hero? = null
+
     fun bind(hero: Hero) {
+        currentHero = hero
         binding.apply {
             heroImageView.load("$BASE_URL${hero.image}")
             heroNameTextView.text = hero.name
@@ -23,6 +24,14 @@ class HeroViewHolder(
             apTextView.text = hero.ap.toString()
             winRateTextView.text = hero.winRate.toString()
         }
-        Timber.d(hero.image)
+    }
+
+    init {
+        binding.root.setOnClickListener {view->
+            currentHero?.let { hero ->
+                val action = ListScreenFragmentDirections.actionListScreenFragmentToDetailFragment(hero.id)
+                view.findNavController().navigate(action)
+            }
+        }
     }
 }

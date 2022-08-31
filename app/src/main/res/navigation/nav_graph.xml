@@ -8,5 +8,18 @@
         android:id="@+id/listScreenFragment"
         android:name="com.example.astonlolapp.presentation.screens.list_screen.ListScreenFragment"
         android:label="fragment_list_screen"
-        tools:layout="@layout/fragment_list_screen" />
+        tools:layout="@layout/fragment_list_screen" >
+        <action
+            android:id="@+id/action_listScreenFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.astonlolapp.presentation.screens.details_screen.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="heroId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

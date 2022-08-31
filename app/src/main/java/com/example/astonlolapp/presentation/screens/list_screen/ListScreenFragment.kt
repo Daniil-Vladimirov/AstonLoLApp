@@ -34,7 +34,6 @@ class ListScreenFragment :
     private val listScreenViewModel by viewModels<ListScreenViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //Timber.tag("ListFragment").d("onCreate")
         super.onCreate(savedInstanceState)
         heroes = listScreenViewModel.allHeroes
     }
@@ -44,7 +43,6 @@ class ListScreenFragment :
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Timber.tag("ListFragment").d("onCreateView")
         // Inflate the layout for this fragment
         _binding = FragmentListScreenBinding.inflate(inflater, container, false)
 
