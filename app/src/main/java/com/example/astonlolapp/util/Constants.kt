@@ -9,4 +9,6 @@ object Constants {
     const val HERO_DATABASE = "hero_database"
 
     const val ITEMS_PAGE_SIZE = 3
+
+    const val HERO_PREFERENCES_NAME = "hero_preferences"
 }
