@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/fragment_first.xml" value="0.29846014492753625" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/motion_15_parallax.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/onboarding_1.xml" value="0.1778115501519757" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/onboarding_2.xml" value="0.1778115501519757" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/onboarding_3.xml" value="0.1778115501519757" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/onboarding_viewpager.xml" value="0.1778115501519757" />
       </map>
     </option>
   </component>
