@@ -19,9 +19,9 @@ class OnboardingActivity : AppCompatActivity() {
         val viewPagerHeader = findViewById<ViewpagerHeader>(R.id.motionLayout)
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addPage("Page 1", R.layout.onboarding_1)
-        adapter.addPage("Page 2", R.layout.onboarding_2)
-        adapter.addPage("Page 3", R.layout.onboarding_3)
+        adapter.addPage("", R.layout.onboarding_1)
+        adapter.addPage("", R.layout.onboarding_2)
+        adapter.addPage("", R.layout.onboarding_3)
         binding.pager.adapter = adapter
             binding.tabs.setupWithViewPager(binding.pager)
         if (viewPagerHeader != null) {
