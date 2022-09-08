@@ -22,4 +22,15 @@
             android:name="heroId"
             app:argType="integer" />
     </fragment>
+    <activity
+        android:id="@+id/splashScreenActivity"
+        android:name="com.example.astonlolapp.presentation.screens.splash_screen.SplashScreenActivity"
+        android:label="activity_splash_screen"
+        tools:layout="@layout/activity_splash_screen" />
+
+       <activity
+        android:id="@+id/onBoardingActivity"
+        android:name="com.example.astonlolapp.presentation.screens.onboarding.OnBoardingActivity"
+        android:label="onboarding_1"
+        tools:layout="@layout/onboarding_1" />
 </navigation>

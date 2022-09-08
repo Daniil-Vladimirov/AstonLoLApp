@@ -11,4 +11,5 @@ object Constants {
     const val ITEMS_PAGE_SIZE = 3
 
     const val HERO_PREFERENCES_NAME = "hero_preferences"
+    const val PREFERENCES_KEY = "on_boarding_completed"
 }

@@ -21,10 +21,13 @@
         app:layout_constraintVertical_bias="0.400" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/continue_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/darkGray"
         android:text="Continue"
+        android:onClick="onBoardingClicked"
+        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

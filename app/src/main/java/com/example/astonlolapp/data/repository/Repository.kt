@@ -27,10 +27,10 @@ class Repository @Inject constructor(
     }
 
     suspend fun saveOnBoardingState(state: Boolean) {
-        dataStoreOperationsAbs.insertPreferences(state)
+        dataStoreOperationsAbs.saveOnBoardingState(state = state)
     }
 
     fun readBoardingState(): Flow<Boolean> {
-        return dataStoreOperationsAbs.readPreferences()
+        return dataStoreOperationsAbs.readOnBoardingState()
     }
 }
