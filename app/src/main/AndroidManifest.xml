@@ -39,7 +39,7 @@
         </activity>
 
         <activity
-            android:name=".presentation.screens.onboarding.OnBoardingActivity"
+            android:name=".presentation.screens.onboarding_screen.OnBoardingActivity"
             android:exported="true"
             android:launchMode="singleInstance"
 

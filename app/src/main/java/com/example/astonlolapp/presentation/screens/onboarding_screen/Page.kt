@@ -1,4 +1,4 @@
-package com.example.astonlolapp.presentation.screens.onboarding
+package com.example.astonlolapp.presentation.screens.onboarding_screen
 
 import android.os.Bundle
 import android.view.LayoutInflater

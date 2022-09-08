@@ -30,7 +30,16 @@
 
        <activity
         android:id="@+id/onBoardingActivity"
-        android:name="com.example.astonlolapp.presentation.screens.onboarding.OnBoardingActivity"
+        android:name="com.example.astonlolapp.presentation.screens.onboarding_screen.OnBoardingActivity"
         android:label="onboarding_1"
         tools:layout="@layout/onboarding_1" />
+    <fragment
+        android:id="@+id/fragmentComics"
+        android:name="com.example.astonlolapp.presentation.screens.comics_screen.FragmentComics"
+        android:label="fragment_comics"
+        tools:layout="@layout/fragment_comics" />
+    <fragment
+        android:id="@+id/fragmentLocations"
+        android:name="com.example.astonlolapp.presentation.screens.locations_screen.FragmentLocations"
+        android:label="FragmentLocations" />
 </navigation>

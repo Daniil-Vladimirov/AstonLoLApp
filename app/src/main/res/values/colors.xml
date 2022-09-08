@@ -22,5 +22,6 @@
     <color name="backgroundColor">@color/lightGray</color>
     <color name="placeholderColor">@color/mediumGray</color>
     <color name="itemColor">@color/darker</color>
+    <color name="bgBottomNavigation">#419cd1</color>
 
 </resources>

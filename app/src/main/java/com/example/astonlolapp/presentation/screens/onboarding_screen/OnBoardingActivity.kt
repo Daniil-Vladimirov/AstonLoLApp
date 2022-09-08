@@ -1,27 +1,14 @@
-package com.example.astonlolapp.presentation.screens.onboarding
+package com.example.astonlolapp.presentation.screens.onboarding_screen
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
-import androidx.lifecycle.lifecycleScope
 import com.example.astonlolapp.MainActivity
 import com.example.astonlolapp.R
-import com.example.astonlolapp.data.repository.dataStore
 import com.example.astonlolapp.databinding.OnboardingViewpagerBinding
-import com.example.astonlolapp.domain.repository.DataStoreOperationsAbs
-import com.example.astonlolapp.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
-import java.io.IOException
 
 @AndroidEntryPoint
 class OnBoardingActivity : AppCompatActivity() {

@@ -1,11 +1,11 @@
-package com.example.astonlolapp.presentation.screens.onboarding
+package com.example.astonlolapp.presentation.screens.onboarding_screen
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.viewpager.widget.ViewPager
 
-class OnBoardingViewPager @JvmOverloads constructor(
+class ViewpagerHeader @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : MotionLayout(context, attrs, defStyleAttr), ViewPager.OnPageChangeListener {
 
@@ -13,7 +13,7 @@ class OnBoardingViewPager @JvmOverloads constructor(
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-        var numPages = 3
+        val numPages = 3
         progress = (position + positionOffset) / (numPages - 1)
     }
 
