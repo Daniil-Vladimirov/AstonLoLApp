@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/heroes_list_menu_item"
+        android:id="@+id/listScreenFragment"
         android:icon="@drawable/ic_hero_list"
         android:title="Heroes"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/locations_fragment_menu_item"
+        android:id="@+id/fragmentLocations"
         android:icon="@drawable/ic_locations"
         android:title="Locations"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/comics_fragment_menu_item"
+        android:id="@+id/fragmentComics"
         android:icon="@drawable/ic_comics"
         android:title="Comics"
         app:showAsAction="ifRoom"/>

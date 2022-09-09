@@ -1,5 +1,6 @@
-package com.example.astonlolapp.presentation.screens.comics_screen
+package com.example.astonlolapp.presentation.screens.list_screen
 
+import HeroesPagingAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,29 +12,30 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.astonlolapp.databinding.FragmentComicsBinding
-import com.example.astonlolapp.domain.model.Comics
+import com.example.astonlolapp.databinding.FragmentListScreenBinding
+import com.example.astonlolapp.domain.model.Hero
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
-class FragmentComics :
+class FragmentList :
     Fragment() {
 
 
-    private var _binding: FragmentComicsBinding? = null
+    private var _binding: FragmentListScreenBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var comics: Flow<PagingData<Comics>>
-    private lateinit var comicsAdapter: ComicsPagingAdapter
+    private lateinit var heroes: Flow<PagingData<Hero>>
+    private lateinit var heroAdapter: HeroesPagingAdapter
 
-    private val comicsScreenViewModel by viewModels<ComicsViewModel>()
+    private val listScreenViewModel by viewModels<ListScreenViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        comics = comicsScreenViewModel.allComics
+        heroes = listScreenViewModel.allHeroes
     }
 
 
@@ -42,16 +44,16 @@ class FragmentComics :
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentComicsBinding.inflate(inflater, container, false)
+        _binding = FragmentListScreenBinding.inflate(inflater, container, false)
 
-        comicsAdapter = ComicsPagingAdapter()
+        heroAdapter = HeroesPagingAdapter()
 
-        setupRecyclerView(comicsAdapter)
+        setupRecyclerView(heroAdapter)
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                comics.collectLatest {
-                    comicsAdapter.submitData(it)
+                heroes.collectLatest {
+                    heroAdapter.submitData(it)
                 }
             }
         }
@@ -65,8 +67,14 @@ class FragmentComics :
     }
 
 
-    private fun setupRecyclerView(comicsAdapter: ComicsPagingAdapter) {
-        binding.comicsRecyclerView.adapter = comicsAdapter
-        binding.comicsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+    private fun setupRecyclerView(heroAdapter: HeroesPagingAdapter) {
+        binding.recyclerview.adapter = heroAdapter
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
     }
 }
+
+
+
+
+
+
