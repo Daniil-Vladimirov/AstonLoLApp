@@ -26,7 +26,7 @@ class FragmentComics :
     private var _binding: FragmentComicsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var comics: Flow<PagingData<Comics>>
+    private lateinit var comics: Flow<List<Comics>>
     private lateinit var comicsAdapter: ComicsPagingAdapter
 
     private val comicsScreenViewModel by viewModels<ComicsViewModel>()

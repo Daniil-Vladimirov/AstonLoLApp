@@ -8,7 +8,7 @@ object Constants {
     const val REMOTE_KEYS_TABLE = "remote_keys_table"
     const val HERO_DATABASE = "hero_database"
 
-    const val COMICS_DATABASE_TABLE = "hero_database_table"
+    const val COMICS_DATABASE_TABLE = "comics_database_table"
 
     const val ITEMS_PAGE_SIZE = 3
 

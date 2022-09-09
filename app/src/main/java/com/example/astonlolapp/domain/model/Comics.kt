@@ -11,8 +11,8 @@ import kotlinx.serialization.Serializable
 data class Comics(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
-    val name: String,
+    val series: String,
     val cover: String,
     val text: List<String>,
 
-)
+    )

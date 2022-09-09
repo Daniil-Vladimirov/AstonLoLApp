@@ -16,4 +16,7 @@ interface HeroApi {
         @Query("name") name: String
     ): ApiResponse
 
+    @GET("lol/comics")
+    suspend fun getComics(): ApiResponse
+
 }

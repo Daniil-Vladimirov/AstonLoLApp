@@ -1,6 +1,7 @@
 package com.example.astonlolapp.data.repository
 
 import androidx.paging.PagingData
+import com.example.astonlolapp.domain.model.Comics
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.repository.DataStoreOperationsAbs
 import com.example.astonlolapp.domain.repository.LocalDatasourceAbs
@@ -32,5 +33,8 @@ class Repository @Inject constructor(
 
     fun readBoardingState(): Flow<Boolean> {
         return dataStoreOperationsAbs.readOnBoardingState()
+    }
+   fun getComics(): Flow<List<Comics>>{
+        return localDataSourceAbs.getComics()
     }
 }
