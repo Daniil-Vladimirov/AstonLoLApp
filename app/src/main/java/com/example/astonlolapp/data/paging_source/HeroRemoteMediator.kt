@@ -25,6 +25,7 @@ class HeroRemoteMediator(
 
     private val heroDao = heroDatabase.heroDao()
     private val remoteKeyDao = heroDatabase.heroRemoteKeyDao()
+    private val comicsDao = heroDatabase.comicsDao()
 
     override suspend fun initialize(): InitializeAction {
         val maxTimeout = 1440
@@ -81,6 +82,8 @@ class HeroRemoteMediator(
                     if (loadType == LoadType.REFRESH) {
                         heroDao.deleteAllHeroes()
                         remoteKeyDao.deleteAllRemoteKeys()
+                        comicsDao.deleteAllComics()
+
                     }
                     val prevPage = response.prevPage
                     val nextPage = response.nextPage
@@ -96,6 +99,7 @@ class HeroRemoteMediator(
                     }
                     remoteKeyDao.addAllRemoteKeys(heroRemoteKeys = remoteKeys)
                     heroDao.addHeroes(heroes = response.heroes)
+                    comicsDao.addComics(comics = response.comics)
 
 
                 }

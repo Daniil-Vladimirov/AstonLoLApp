@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagingData
+import androidx.paging.PagingSource
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.astonlolapp.databinding.FragmentComicsBinding
 import com.example.astonlolapp.domain.model.Comics
@@ -26,7 +27,7 @@ class FragmentComics :
     private var _binding: FragmentComicsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var comics: Flow<List<Comics>>
+    private lateinit var comics: Flow<PagingData<Comics>>
     private lateinit var comicsAdapter: ComicsPagingAdapter
 
     private val comicsScreenViewModel by viewModels<ComicsViewModel>()
