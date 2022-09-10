@@ -65,7 +65,8 @@ class RemoteDataSourceImpl
             ),
             pagingSourceFactory = {
                 ComicsSource(
-                    heroApi = heroApi
+                    heroApi = heroApi,
+                    heroDatabase = heroDatabase
                 )
             }
         ).flow

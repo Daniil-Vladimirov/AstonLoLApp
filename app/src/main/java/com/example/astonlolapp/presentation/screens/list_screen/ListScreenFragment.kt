@@ -1,6 +1,5 @@
 package com.example.astonlolapp.presentation.screens.list_screen
 
-import HeroesPagingAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ListScreenFragment :
@@ -36,6 +34,7 @@ class ListScreenFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         heroes = listScreenViewModel.allHeroes
+
     }
 
 

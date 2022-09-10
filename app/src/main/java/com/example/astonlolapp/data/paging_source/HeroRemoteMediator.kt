@@ -82,7 +82,6 @@ class HeroRemoteMediator(
                     if (loadType == LoadType.REFRESH) {
                         heroDao.deleteAllHeroes()
                         remoteKeyDao.deleteAllRemoteKeys()
-                        comicsDao.deleteAllComics()
 
                     }
                     val prevPage = response.prevPage

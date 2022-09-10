@@ -1,10 +1,11 @@
+package com.example.astonlolapp.presentation.screens.list_screen
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.astonlolapp.databinding.HeroListElementBinding
 import com.example.astonlolapp.domain.model.Hero
-import com.example.astonlolapp.presentation.adapters.HeroViewHolder
 
 class HeroesPagingAdapter() :
     PagingDataAdapter<Hero, HeroViewHolder>(HERO_DIFF_CALLBACK) {
