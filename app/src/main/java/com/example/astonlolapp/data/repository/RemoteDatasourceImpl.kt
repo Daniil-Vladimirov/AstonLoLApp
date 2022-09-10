@@ -13,7 +13,9 @@ import com.example.astonlolapp.domain.model.Comics
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.repository.RemoteDatasourceAbs
 import com.example.astonlolapp.util.Constants.ITEMS_PAGE_SIZE
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 @ExperimentalPagingApi
 class RemoteDataSourceImpl
@@ -23,6 +25,7 @@ class RemoteDataSourceImpl
 ) : RemoteDatasourceAbs {
 
     private val heroDao = heroDatabase.heroDao()
+    private val comicsDao = heroDatabase.comicsDao()
 
 
     override fun getAllHeroes(): Flow<PagingData<Hero>> {
@@ -57,7 +60,7 @@ class RemoteDataSourceImpl
 
     }
 
-    override fun getComics(): Flow<PagingData<Comics>> {
+    override suspend fun getComics(): Flow<PagingData<Comics>> {
         return Pager(
             config = PagingConfig(
                 pageSize = ITEMS_PAGE_SIZE,
@@ -66,10 +69,11 @@ class RemoteDataSourceImpl
             pagingSourceFactory = {
                 ComicsSource(
                     heroApi = heroApi,
-                    heroDatabase = heroDatabase
+                    heroDatabase = heroDatabase,
                 )
             }
         ).flow
+
     }
 
 }

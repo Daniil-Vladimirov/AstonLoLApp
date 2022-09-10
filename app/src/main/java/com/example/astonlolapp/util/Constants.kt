@@ -10,7 +10,7 @@ object Constants {
 
     const val COMICS_DATABASE_TABLE = "comics_database_table"
 
-    const val ITEMS_PAGE_SIZE = 3
+    const val ITEMS_PAGE_SIZE = 5
 
     const val HERO_PREFERENCES_NAME = "hero_preferences"
     const val PREFERENCES_KEY = "on_boarding_completed"

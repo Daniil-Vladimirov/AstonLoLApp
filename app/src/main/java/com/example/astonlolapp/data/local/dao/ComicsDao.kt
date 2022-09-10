@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.astonlolapp.domain.model.Comics
+import com.example.astonlolapp.domain.model.Hero
 import kotlinx.coroutines.flow.Flow
 
 @Dao

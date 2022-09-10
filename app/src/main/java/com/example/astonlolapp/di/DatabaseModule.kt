@@ -36,7 +36,7 @@ object DatabaseModule {
         database: HeroDatabase
     ): LocalDatasourceAbs {
         return LocalDataSourceImp(
-            dataBase = database
+            heroDatabase = database
         )
     }
 

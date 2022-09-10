@@ -36,6 +36,6 @@ class Repository @Inject constructor(
         return dataStoreOperationsAbs.readOnBoardingState()
     }
    fun getComics(): Flow<PagingData<Comics>>{
-        return remoteDataSourceAbs.getComics()
+        return localDataSourceAbs.getComics()
     }
 }
