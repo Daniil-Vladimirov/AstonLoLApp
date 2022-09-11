@@ -10,10 +10,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.astonlolapp.databinding.FragmentComicsBinding
-import com.example.astonlolapp.domain.model.Comics
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -53,8 +51,7 @@ class FragmentComics :
     }
 
 
-    private fun submitComics(comics: PagingData<Comics>?) =
-        if (comics == null) comicsScreenViewModel.comicsApi else comicsScreenViewModel.comics
+
 
     override fun onDestroyView() {
         super.onDestroyView()

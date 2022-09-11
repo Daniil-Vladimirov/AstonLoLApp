@@ -28,4 +28,7 @@ sealed class ComicsPage(
     class Seventh(image: String) : ComicsPage(
         image = image,
     )
+    class Eighth(image: String) : ComicsPage(
+        image = image,
+    )
 }

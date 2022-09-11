@@ -16,5 +16,5 @@ object Constants {
     const val PREFERENCES_KEY = "on_boarding_completed"
 
     const val COMICS_PAGE_COUNT = 7
-    const val LAST_ON_BOARDING_PAGE = 7
+    const val LAST_ON_COMICS_PAGE = 6
 }

@@ -1,4 +1,4 @@
-package com.example.astonlolapp.presentation.screens.details_screen
+package com.example.astonlolapp.presentation.screens.hero_details_screen
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

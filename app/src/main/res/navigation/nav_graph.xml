@@ -6,7 +6,7 @@
     app:startDestination="@id/listScreenFragment">
     <fragment
         android:id="@+id/listScreenFragment"
-        android:name="com.example.astonlolapp.presentation.screens.list_screen.ListScreenFragment"
+        android:name="com.example.astonlolapp.presentation.screens.heroes_screen.ListScreenFragment"
         android:label="fragment_list_screen"
         tools:layout="@layout/fragment_list_screen" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.astonlolapp.presentation.screens.details_screen.DetailFragment"
+        android:name="com.example.astonlolapp.presentation.screens.hero_details_screen.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument

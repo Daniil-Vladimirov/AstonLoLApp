@@ -1,25 +1,19 @@
-package com.example.astonlolapp.presentation.screens.details_screen
+package com.example.astonlolapp.presentation.screens.hero_details_screen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import coil.load
-import com.example.astonlolapp.R
-import com.example.astonlolapp.databinding.FragmentDetailBinding
 import com.example.astonlolapp.databinding.FragmentDetailMotionBinding
-import com.example.astonlolapp.util.Constants
 import com.example.astonlolapp.util.Constants.BASE_URL
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

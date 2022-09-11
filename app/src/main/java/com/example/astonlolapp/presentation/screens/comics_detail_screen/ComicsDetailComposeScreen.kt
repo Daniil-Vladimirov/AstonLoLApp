@@ -27,8 +27,9 @@ import com.example.astonlolapp.domain.model.ComicsPage
 import com.example.astonlolapp.ui.*
 import com.example.astonlolapp.util.Constants.BASE_URL
 import com.example.astonlolapp.util.Constants.COMICS_PAGE_COUNT
-import com.example.astonlolapp.util.Constants.LAST_ON_BOARDING_PAGE
+import com.example.astonlolapp.util.Constants.LAST_ON_COMICS_PAGE
 import com.google.accompanist.pager.*
+import timber.log.Timber
 
 
 @ExperimentalAnimationApi
@@ -65,7 +66,8 @@ fun ComicsPageScreen(
             activeColor = MaterialTheme.colors.activeIndicatorColor,
             inactiveColor = MaterialTheme.colors.inactiveIndicatorColor,
             indicatorWidth = PAGING_INDICATOR_WIDTH,
-            spacing = PAGING_INDICATOR_SPACING
+            spacing = PAGING_INDICATOR_SPACING,
+            indicatorHeight = PAGING_INDICATOR_HEIGHT
         )
         FinishButton(
             modifier = Modifier.weight(1f),
@@ -75,6 +77,7 @@ fun ComicsPageScreen(
             navController.navigate(R.id.fragmentComics)
         }
     }
+    Timber.d("PAGE STATE ${pagerState.currentPage}")
 }
 
 
@@ -119,7 +122,7 @@ fun FinishButton(
     ) {
         AnimatedVisibility(
             modifier = Modifier.fillMaxWidth(),
-            visible = pagerState.currentPage == LAST_ON_BOARDING_PAGE
+            visible = pagerState.currentPage == LAST_ON_COMICS_PAGE
         ) {
             Button(
                 onClick = onClick,
@@ -144,6 +147,7 @@ private fun createPages(comicsPictures: List<String>?): List<ComicsPage> {
         list.add(ComicsPage.Fifth(image = comicsPictures[4]))
         list.add(ComicsPage.Sixth(image = comicsPictures[5]))
         list.add(ComicsPage.Seventh(image = comicsPictures[6]))
+        list.add(ComicsPage.Eighth(image = comicsPictures[7]))
 
     }
     return list
@@ -152,7 +156,7 @@ private fun createPages(comicsPictures: List<String>?): List<ComicsPage> {
 private fun ContentScale.Companion.scaleImage(context: Context): ContentScale {
     val orientation = context.resources.configuration.orientation
     return if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-        Fit
+        Crop
     } else {
         FillWidth
     }
