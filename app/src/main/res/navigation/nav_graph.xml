@@ -30,14 +30,14 @@
         tools:layout="@layout/fragment_comics" >
         <action
             android:id="@+id/action_fragmentComics_to_composeUIFragment"
-            app:destination="@id/composeUIFragment" />
+            app:destination="@id/comics_detail_fragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentLocations"
         android:name="com.example.astonlolapp.presentation.screens.locations_screen.FragmentLocations"
         android:label="FragmentLocations" />
     <fragment
-        android:id="@+id/composeUIFragment"
+        android:id="@+id/comics_detail_fragment"
         android:name="com.example.astonlolapp.presentation.screens.comics_detail_screen.ComicsDetailScreen"
         android:label="ComposeUIFragment" >
         <argument

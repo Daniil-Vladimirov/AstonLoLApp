@@ -1,6 +1,7 @@
 package com.example.astonlolapp.domain.use_cases
 
 import com.example.astonlolapp.domain.use_cases.get_all_heroes.GetAllHeroesUseCase
+import com.example.astonlolapp.domain.use_cases.get_comics.GetComicsFromApiUseCase
 import com.example.astonlolapp.domain.use_cases.get_comics.GetComicsUseCase
 import com.example.astonlolapp.domain.use_cases.get_selected_comics.GetSelectedComicsUseCase
 import com.example.astonlolapp.domain.use_cases.get_selected_hero.GetSelectedHeroUseCase
@@ -15,5 +16,6 @@ data class UseCases(
     val saveOnboardingStateUseCase: SaveOnboardingStateUseCase,
     val readOnboardingUseCase: ReadOnboardingUseCase,
     val getComicsUseCase: GetComicsUseCase,
-    val getSelectedComicsUseCase: GetSelectedComicsUseCase
+    val getSelectedComicsUseCase: GetSelectedComicsUseCase,
+    val getComicsFromApiUseCase: GetComicsFromApiUseCase
 )

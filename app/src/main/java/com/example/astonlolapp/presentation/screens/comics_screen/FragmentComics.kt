@@ -9,13 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState
 import androidx.paging.PagingData
-import androidx.paging.PagingSource
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.astonlolapp.databinding.FragmentComicsBinding
 import com.example.astonlolapp.domain.model.Comics
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -26,15 +25,16 @@ class FragmentComics :
 
     private var _binding: FragmentComicsBinding? = null
     private val binding get() = _binding!!
+    private val comicsScreenViewModel by viewModels<ComicsViewModel>()
 
-    private lateinit var comics: Flow<PagingData<Comics>>
     private lateinit var comicsAdapter: ComicsPagingAdapter
 
-    private val comicsScreenViewModel by viewModels<ComicsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        comics = comicsScreenViewModel.allComics
+        comicsAdapter = ComicsPagingAdapter()
+
+
     }
 
 
@@ -45,20 +45,16 @@ class FragmentComics :
         // Inflate the layout for this fragment
         _binding = FragmentComicsBinding.inflate(inflater, container, false)
 
-        comicsAdapter = ComicsPagingAdapter()
+        loadDataFromCache()
+        loadDataFromApi()
 
         setupRecyclerView(comicsAdapter)
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                comics.collectLatest {
-                    comicsAdapter.submitData(it)
-                }
-            }
-        }
-
         return binding.root
     }
+
+
+    private fun submitComics(comics: PagingData<Comics>?) =
+        if (comics == null) comicsScreenViewModel.comicsApi else comicsScreenViewModel.comics
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -70,4 +66,29 @@ class FragmentComics :
         binding.comicsRecyclerView.adapter = comicsAdapter
         binding.comicsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
+
+    private fun loadDataFromCache() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                comicsScreenViewModel.comics.collectLatest { comics ->
+                    comicsAdapter.submitData(comics)
+                }
+            }
+        }
+    }
+
+    private fun loadDataFromApi() {
+        comicsAdapter.addLoadStateListener { loadState ->
+            if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && comicsAdapter.itemCount < 1) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    repeatOnLifecycle(Lifecycle.State.STARTED) {
+                        comicsScreenViewModel.comicsApi.collectLatest { comics ->
+                            comicsAdapter.submitData(comics)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+

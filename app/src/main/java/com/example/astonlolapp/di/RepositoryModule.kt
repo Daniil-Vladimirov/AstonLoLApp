@@ -6,6 +6,7 @@ import com.example.astonlolapp.data.repository.Repository
 import com.example.astonlolapp.domain.repository.DataStoreOperationsAbs
 import com.example.astonlolapp.domain.use_cases.UseCases
 import com.example.astonlolapp.domain.use_cases.get_all_heroes.GetAllHeroesUseCase
+import com.example.astonlolapp.domain.use_cases.get_comics.GetComicsFromApiUseCase
 import com.example.astonlolapp.domain.use_cases.get_comics.GetComicsUseCase
 import com.example.astonlolapp.domain.use_cases.get_selected_comics.GetSelectedComicsUseCase
 import com.example.astonlolapp.domain.use_cases.get_selected_hero.GetSelectedHeroUseCase
@@ -40,10 +41,9 @@ object RepositoryModule {
             saveOnboardingStateUseCase = SaveOnboardingStateUseCase(repository = repository),
             readOnboardingUseCase = ReadOnboardingUseCase(repository = repository),
             getComicsUseCase = GetComicsUseCase(repository = repository),
-            getSelectedComicsUseCase = GetSelectedComicsUseCase(repository = repository)
-
+            getSelectedComicsUseCase = GetSelectedComicsUseCase(repository = repository),
+            getComicsFromApiUseCase = GetComicsFromApiUseCase(repository = repository)
         )
     }
-
 
 }

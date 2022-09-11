@@ -13,9 +13,7 @@ import com.example.astonlolapp.domain.model.Comics
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.repository.RemoteDatasourceAbs
 import com.example.astonlolapp.util.Constants.ITEMS_PAGE_SIZE
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
 
 @ExperimentalPagingApi
 class RemoteDataSourceImpl
@@ -60,7 +58,7 @@ class RemoteDataSourceImpl
 
     }
 
-    override suspend fun getComics(): Flow<PagingData<Comics>> {
+    override fun getComicsFromApi(): Flow<PagingData<Comics>> {
         return Pager(
             config = PagingConfig(
                 pageSize = ITEMS_PAGE_SIZE,

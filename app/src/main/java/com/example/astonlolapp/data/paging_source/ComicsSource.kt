@@ -9,7 +9,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-typealias ComicsPageLoader = suspend (pageIndex: Int, pageSize: Int) -> List<Comics>
 
 class ComicsSource(
     private val heroApi: HeroApi,
@@ -31,7 +30,6 @@ class ComicsSource(
 
 
             if (comics.isNotEmpty()) {
-                Timber.d("comics are not empty")
                 LoadResult.Page(
                     data = comics,
                     prevKey = apiResponse.prevPage,

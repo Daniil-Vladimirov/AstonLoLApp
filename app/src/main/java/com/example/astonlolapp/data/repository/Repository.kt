@@ -40,4 +40,7 @@ class Repository @Inject constructor(
    fun getComics(): Flow<PagingData<Comics>>{
         return localDataSourceAbs.getComics()
     }
+    fun getComicsFromApi(): Flow<PagingData<Comics>>{
+        return remoteDataSourceAbs.getComicsFromApi()
+    }
 }
