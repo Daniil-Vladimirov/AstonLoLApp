@@ -1,7 +1,6 @@
 package com.example.astonlolapp.data.repository
 
 import androidx.paging.PagingData
-import androidx.paging.PagingSource
 import com.example.astonlolapp.domain.model.Comics
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.repository.DataStoreOperationsAbs
@@ -22,6 +21,9 @@ class Repository @Inject constructor(
 
     suspend fun getSelectedHero(heroId: Int): Hero {
         return localDataSourceAbs.getSelectedHero(heroId = heroId)
+    }
+    suspend fun getSelectedComics(comicsId: Int): Comics {
+        return localDataSourceAbs.getSelectedComics(comicsId = comicsId)
     }
 
     fun searchHeroes(query: String): Flow<PagingData<Hero>> {

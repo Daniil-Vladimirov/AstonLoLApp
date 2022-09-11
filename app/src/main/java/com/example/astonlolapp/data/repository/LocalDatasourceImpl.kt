@@ -27,9 +27,13 @@ class LocalDataSourceImp(heroDatabase: HeroDatabase) : LocalDatasourceAbs {
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-              pagerFactory()
+                pagerFactory()
             }
         ).flow
+    }
+
+    override suspend fun getSelectedComics(comicsId: Int): Comics {
+        return comicsDao.getSelectedComics(comicsId = comicsId)
     }
 
 }

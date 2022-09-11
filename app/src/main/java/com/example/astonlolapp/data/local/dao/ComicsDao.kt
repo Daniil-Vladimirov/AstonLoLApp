@@ -16,6 +16,9 @@ interface ComicsDao {
     @Query("SELECT * FROM comics_database_table ORDER BY id ASC")
     fun getComics(): PagingSource<Int, Comics>
 
+    @Query("SELECT * FROM comics_database_table WHERE id=:comicsId")
+    suspend fun getSelectedComics(comicsId: Int): Comics
+
     @Query("DELETE FROM comics_database_table")
     suspend fun deleteAllComics()
 

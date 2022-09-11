@@ -1,29 +1,26 @@
 package com.example.astonlolapp.domain.model
 
-import androidx.annotation.DrawableRes
-import com.example.astonlolapp.R
+sealed class ComicsPage(
 
-sealed class ComicsPage (
-    @DrawableRes
-    val image: Int,
+    var image: String,
     val title: String,
     val description: String
 ) {
-    object First : ComicsPage(
-        image = R.drawable.ic_comics,
+    class First(image: String) : ComicsPage(
+        image = image,
         title = "Greetings",
-        description = ""
+        description = "Are you a Boruto fan? Because if you are then we have a great news for you!"
     )
 
-    object Second : ComicsPage(
-        image = R.drawable.ic_hero_list,
+    class Second(image: String) : ComicsPage(
+        image = image,
         title = "Explore",
-        description = ""
+        description = "Find your favorite heroes and learn some of the things that you didn't know about."
     )
 
-    object Third : ComicsPage(
-        image = R.drawable.ic_locations,
+    class Third(image: String) : ComicsPage(
+        image = image,
         title = "Power",
-        description = ""
+        description = "Check out your hero's power and  see how much are they strong comparing to others."
     )
 }

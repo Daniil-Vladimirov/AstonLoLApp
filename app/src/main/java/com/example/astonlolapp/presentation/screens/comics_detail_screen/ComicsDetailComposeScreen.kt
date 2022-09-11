@@ -2,7 +2,6 @@ package com.example.astonlolapp.presentation.screens.comics_detail_screen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -13,17 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.astonlolapp.R
 import com.example.astonlolapp.domain.model.ComicsPage
 import com.example.astonlolapp.ui.*
+import com.example.astonlolapp.util.Constants.BASE_URL
 import com.example.astonlolapp.util.Constants.COMICS_PAGE_COUNT
 import com.example.astonlolapp.util.Constants.LAST_ON_BOARDING_PAGE
 import com.google.accompanist.pager.*
@@ -32,16 +29,11 @@ import com.google.accompanist.pager.*
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
-fun WelcomeScreen(
-    navController: NavController,
-    welcomeViewModel: ComicsDetailViewModel
+fun ComicsPageScreen(
+    comicsPictures: List<String>?,
+    navController: NavController
 ) {
-    val pages = listOf(
-        ComicsPage.First,
-        ComicsPage.Second,
-        ComicsPage.Third
-    )
-
+    val pages = createPages(comicsPictures)
     val pagerState = rememberPagerState()
 
     Column(
@@ -55,7 +47,7 @@ fun WelcomeScreen(
             count = COMICS_PAGE_COUNT,
             verticalAlignment = Alignment.Top
         ) { position ->
-            PagerScreen(comicsPage = pages[position])
+            PagerScreen(comicsPicture = comicsPictures?.get(position))
         }
         HorizontalPagerIndicator(
             modifier = Modifier
@@ -71,31 +63,49 @@ fun WelcomeScreen(
             modifier = Modifier.weight(1f),
             pagerState = pagerState
         ) {
-            navController.popBackStack()
             navController.navigate(R.id.fragmentComics)
+            //navController.popBackStack()
         }
     }
 }
 
+
 @Composable
-fun PagerScreen(comicsPage: ComicsPage) {
+fun PagerScreen(comicsPicture: String?) {
+
+
+
+
+
     Column(
         modifier = Modifier
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
-        Image(
+        AsyncImage(
+            modifier = Modifier.fillMaxSize(),
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(data = "$BASE_URL${comicsPicture}")
+                .placeholder(R.drawable.ic_error_placeholder)
+                .error(R.drawable.ic_error_placeholder)
+                .build(),
+            contentScale = ContentScale.Crop,
+            contentDescription = "Comics image"
+        )
+       /* Text(
             modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .fillMaxHeight(0.7f),
-            painter = painterResource(id = comicsPage.image),
-            contentDescription = "Comics page"
+                .fillMaxWidth(),
+            text = comicsPage.title,
+            color = MaterialTheme.colors.titleColor,
+            fontSize = MaterialTheme.typography.h4.fontSize,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
         )
         Text(
             modifier = Modifier
                 .fillMaxWidth(),
-            text = comicsPage.title,
+            text = comicsPage.image,
             color = MaterialTheme.colors.titleColor,
             fontSize = MaterialTheme.typography.h4.fontSize,
             fontWeight = FontWeight.Bold,
@@ -111,7 +121,7 @@ fun PagerScreen(comicsPage: ComicsPage) {
             fontSize = MaterialTheme.typography.subtitle1.fontSize,
             fontWeight = FontWeight.Medium,
             textAlign = TextAlign.Center
-        )
+        )*/
     }
 }
 
@@ -146,6 +156,18 @@ fun FinishButton(
     }
 }
 
+private fun createPages(comicsPictures: List<String>?): List<ComicsPage> {
+    val list = mutableListOf<ComicsPage>()
+    if (comicsPictures != null) {
+        list.add(ComicsPage.First(image = comicsPictures[0]))
+        list.add(ComicsPage.Second(image = comicsPictures[1]))
+        list.add(ComicsPage.Third(image = comicsPictures[2]))
+
+    }
+    return list
+}
+
+/*
 @Composable
 @Preview(showBackground = true)
 fun FirstOnBoardingScreenPreview() {
@@ -168,4 +190,4 @@ fun ThirdOnBoardingScreenPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
         PagerScreen(comicsPage = ComicsPage.Third)
     }
-}
+}*/

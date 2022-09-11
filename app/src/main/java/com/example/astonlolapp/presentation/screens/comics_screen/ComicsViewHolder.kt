@@ -1,9 +1,11 @@
 package com.example.astonlolapp.presentation.screens.comics_screen
 
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.astonlolapp.databinding.ComicsListElementBinding
 import com.example.astonlolapp.domain.model.Comics
+import com.example.astonlolapp.presentation.screens.list_screen.ListScreenFragmentDirections
 import com.example.astonlolapp.util.Constants
 import com.example.astonlolapp.util.Constants.BASE_URL
 
@@ -22,8 +24,11 @@ class ComicsViewHolder(
     }
 
     init {
-        binding.root.setOnClickListener { view ->
-
+        binding.root.setOnClickListener {view->
+            currentComics?.let { comics ->
+                val action = FragmentComicsDirections.actionFragmentComicsToComposeUIFragment(comics.id)
+                view.findNavController().navigate(action)
+            }
         }
     }
 }
