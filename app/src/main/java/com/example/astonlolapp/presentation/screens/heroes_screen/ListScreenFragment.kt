@@ -53,6 +53,7 @@ class ListScreenFragment :
         setupViews(binding)
         fetchHeroes()
         handleLoadingState()
+        setupSwipeToRefresh()
         return binding.root
 
     }
@@ -96,7 +97,12 @@ class ListScreenFragment :
 
             }
         }
-
+    }
+    private fun setupSwipeToRefresh() {
+        binding.swipeToRefreshLayout.setOnRefreshListener {
+            fetchHeroes()
+            binding.swipeToRefreshLayout.isRefreshing = false
+        }
     }
 }
 
