@@ -16,6 +16,7 @@ import com.example.astonlolapp.util.Constants.BASE_URL
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -32,7 +33,7 @@ class DetailFragment : Fragment() {
     ): View {
         _binding = FragmentDetailMotionBinding.inflate(inflater, container, false)
 
-
+        Timber.d("onCreateView")
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 detailScreenViewModel.selectedHero.collect { hero ->
@@ -53,6 +54,7 @@ class DetailFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
     private fun coordinateMotion(binding: FragmentDetailMotionBinding) {
         val appBarLayout: AppBarLayout = binding.appbarLayout
         val motionLayout: MotionLayout = binding.motionLayout

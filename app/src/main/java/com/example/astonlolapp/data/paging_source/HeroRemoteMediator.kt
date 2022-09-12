@@ -1,7 +1,5 @@
 package com.example.astonlolapp.data.paging_source
 
-import android.util.Log
-import android.util.Log.d
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -11,8 +9,9 @@ import com.example.astonlolapp.data.local.HeroDatabase
 import com.example.astonlolapp.data.remote.HeroApi
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.model.HeroRemoteKeys
+import retrofit2.HttpException
 import timber.log.Timber
-import timber.log.Timber.Forest.d
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -32,11 +31,11 @@ class HeroRemoteMediator(
         val lastUpdate = remoteKeyDao.getRemoteKeys(1)?.lastUpdated ?: 0L
         val timePassed = (currentTime - lastUpdate) / 1000 / 60
         return if (timePassed <= maxTimeout) {
-
+            Timber.d("Skip Initial Refresh")
             InitializeAction.SKIP_INITIAL_REFRESH
 
         } else {
-
+            Timber.d("Initial Refresh")
             InitializeAction.LAUNCH_INITIAL_REFRESH
         }
     }
@@ -50,11 +49,13 @@ class HeroRemoteMediator(
 
             val page = when (loadType) {
                 LoadType.REFRESH -> {
+                        Timber.d("REFRESH")
                     val remoteKeys = getRemoteKeysClosestToCurrentPosition(state)
                     remoteKeys?.nextPage?.minus(1) ?: 1
 
                 }
                 LoadType.PREPEND -> {
+                    Timber.d("PREPEND")
                     val remoteKeys = getRemoteKeysForFirstItem(state)
                     val prevPage = remoteKeys?.prevPage
                         ?: return MediatorResult.Success(
@@ -65,6 +66,7 @@ class HeroRemoteMediator(
 
                 }
                 LoadType.APPEND -> {
+                    Timber.d("APPEND")
                     val remoteKey = getRemoteKeyForLastItem(state)
                     val nextPage = remoteKey?.nextPage ?: return MediatorResult.Success(
                         endOfPaginationReached = remoteKey != null
@@ -106,11 +108,18 @@ class HeroRemoteMediator(
                 endOfPaginationReached = response.nextPage == null
             )
 
-        } catch (e: Exception) {
-            Timber.d(e)
-            return MediatorResult.Error(e)
-
+        } catch (exception: IOException) {
+            Timber.d(exception)
+            return MediatorResult.Error(exception)
+        } catch (exception: HttpException) {
+            Timber.d(exception)
+            return MediatorResult.Error(exception)
         }
+        catch (exception: Exception) {
+            Timber.d(exception)
+            return MediatorResult.Error(exception)
+        }
+
     }
 
 
@@ -123,8 +132,6 @@ class HeroRemoteMediator(
     }
 
     private suspend fun getRemoteKeysForFirstItem(state: PagingState<Int, Hero>): HeroRemoteKeys? {
-
-
         val firstPage = state.pages.firstOrNull()
         val firstRemoteKey =
             if (firstPage?.data?.isNotEmpty() == true) {

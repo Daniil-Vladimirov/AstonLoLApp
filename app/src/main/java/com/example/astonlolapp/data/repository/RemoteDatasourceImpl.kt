@@ -23,7 +23,6 @@ class RemoteDataSourceImpl
 ) : RemoteDatasourceAbs {
 
     private val heroDao = heroDatabase.heroDao()
-    private val comicsDao = heroDatabase.comicsDao()
 
 
     override fun getAllHeroes(): Flow<PagingData<Hero>> {

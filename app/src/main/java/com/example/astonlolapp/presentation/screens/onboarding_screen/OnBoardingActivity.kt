@@ -29,9 +29,9 @@ class OnBoardingActivity : AppCompatActivity() {
 
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addPage("", R.layout.onboarding_1)
-        adapter.addPage("", R.layout.onboarding_2)
-        adapter.addPage("", R.layout.onboarding_3)
+        adapter.addPage("first_fragment", R.layout.onboarding_1)
+        adapter.addPage("second_fragment", R.layout.onboarding_2)
+        adapter.addPage("third_fragment", R.layout.onboarding_3)
         binding.pager.adapter = adapter
         binding.tabs.setupWithViewPager(binding.pager)
         if (viewPagerHeader != null) {
@@ -41,15 +41,15 @@ class OnBoardingActivity : AppCompatActivity() {
 
     }
 
+
     fun onBoardingClicked(view: View) {
-
-
-        view.setOnClickListener {
-            onBoardingViewModel.saveOnBoardingState(state = true)
+        onBoardingViewModel.saveOnBoardingState(state = true)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
 
-        }
     }
+
+
 }
+

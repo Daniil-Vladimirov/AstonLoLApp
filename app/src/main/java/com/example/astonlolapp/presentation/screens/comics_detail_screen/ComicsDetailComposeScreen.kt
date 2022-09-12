@@ -148,6 +148,8 @@ private fun createPages(comicsPictures: List<String>?): List<ComicsPage> {
         list.add(ComicsPage.Sixth(image = comicsPictures[5]))
         list.add(ComicsPage.Seventh(image = comicsPictures[6]))
         list.add(ComicsPage.Eighth(image = comicsPictures[7]))
+        list.add(ComicsPage.Ninth(image = comicsPictures[8]))
+        list.add(ComicsPage.Tenth(image = comicsPictures[9]))
 
     }
     return list

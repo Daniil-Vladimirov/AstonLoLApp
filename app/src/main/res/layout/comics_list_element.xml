@@ -21,9 +21,9 @@
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/comics_cover_image_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:scaleType="centerCrop"
-            app:crossfade="0.3"
+            app:crossfade="0.5"
             app:altSrc="@drawable/comics_gradient_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

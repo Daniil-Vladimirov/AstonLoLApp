@@ -12,7 +12,8 @@
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/comics_list_element.xml" value="0.1773049645390071" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/fragment_comics.xml" value="0.13796296296296295" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/fragment_detail_bottom_sheet_layout.xml" value="0.1778115501519757" />
-        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/fragment_list_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/fragment_list_item_loader.xml" value="0.1" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/fragment_list_screen.xml" value="0.25" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/fragment_locations.xml" value="0.13796296296296295" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/hero_list_element.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/motion_15_parallax.xml" value="0.1" />
@@ -22,6 +23,7 @@
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/onboarding_motion.xml" value="0.1778115501519757" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/onboarding_viewpager.xml" value="0.1778115501519757" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/menu/bottom_navigation.xml" value="0.358974358974359" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/xml/motion_loader.xml" value="0.1773049645390071" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/xml/tool_bar.xml" value="0.1" />
       </map>
     </option>

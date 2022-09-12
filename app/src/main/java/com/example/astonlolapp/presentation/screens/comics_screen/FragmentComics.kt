@@ -15,6 +15,7 @@ import com.example.astonlolapp.databinding.FragmentComicsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class FragmentComics :
@@ -31,7 +32,7 @@ class FragmentComics :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         comicsAdapter = ComicsPagingAdapter()
-
+        Timber.tag("FragmentComics").d("OnCreate")
 
     }
 

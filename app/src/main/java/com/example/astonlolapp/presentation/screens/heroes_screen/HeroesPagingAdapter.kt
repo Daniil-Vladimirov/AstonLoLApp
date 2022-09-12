@@ -6,20 +6,24 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.astonlolapp.databinding.HeroListElementBinding
 import com.example.astonlolapp.domain.model.Hero
+import timber.log.Timber
 
 class HeroesPagingAdapter() :
     PagingDataAdapter<Hero, HeroViewHolder>(HERO_DIFF_CALLBACK) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroViewHolder =
-        HeroViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroViewHolder {
+        Timber.d("onCreate")
+      return  HeroViewHolder(
             HeroListElementBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false,
             )
         )
+    }
 
     override fun onBindViewHolder(holder: HeroViewHolder, position: Int) {
+        Timber.d("onBindViewHolder")
         val tile = getItem(position)
         if (tile != null) {
             holder.bind(tile)
