@@ -9,11 +9,12 @@ import com.example.astonlolapp.data.local.dao.ComicsDao
 import com.example.astonlolapp.data.local.dao.HeroDao
 import com.example.astonlolapp.data.local.dao.HeroRemoteKeysDao
 import com.example.astonlolapp.domain.model.Comics
+import com.example.astonlolapp.domain.model.FavouriteHeroes
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.model.HeroRemoteKeys
 
 @Database(
-    entities = [Hero::class, HeroRemoteKeys::class, Comics::class],
+    entities = [Hero::class, HeroRemoteKeys::class, Comics::class, FavouriteHeroes::class],
     version = 1,
     exportSchema = false
 )

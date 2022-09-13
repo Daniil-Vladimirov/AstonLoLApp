@@ -36,4 +36,28 @@ class LocalDataSourceImp(heroDatabase: HeroDatabase) : LocalDatasourceAbs {
         return comicsDao.getSelectedComics(comicsId = comicsId)
     }
 
+    override suspend fun deleteFavouriteHero(heroId: Int) {
+        heroDao.deleteFavouriteHero(heroId = heroId)
+    }
+
+    override suspend fun deleteAllFavouriteHeroes() {
+        heroDao.deleteAllFavouriteHeroes()
+    }
+
+    override suspend fun addFavouriteHeroes(hero: Hero) {
+        heroDao.addFavouriteHeroes(hero = hero)
+    }
+
+    override fun getAllFavouriteHeroes(): Flow<PagingData<Hero>> {
+        val pagerFactory = { heroDao.getAllFavouriteHeroes() }
+        return Pager(
+            config = PagingConfig(
+                pageSize = Constants.ITEMS_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                pagerFactory()
+            }
+        ).flow
+    }
 }

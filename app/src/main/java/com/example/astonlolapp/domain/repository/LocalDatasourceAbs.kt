@@ -9,4 +9,8 @@ interface LocalDatasourceAbs {
     suspend fun getSelectedHero(heroId: Int): Hero
     fun getComics(): Flow<PagingData<Comics>>
     suspend fun getSelectedComics(comicsId: Int): Comics
+    suspend fun deleteFavouriteHero(heroId: Int)
+    suspend fun deleteAllFavouriteHeroes()
+    suspend fun addFavouriteHeroes(hero: Hero)
+    fun getAllFavouriteHeroes(): Flow<PagingData<Hero>>
 }

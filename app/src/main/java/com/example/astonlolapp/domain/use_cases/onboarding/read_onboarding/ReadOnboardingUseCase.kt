@@ -1,4 +1,4 @@
-package com.example.astonlolapp.domain.use_cases.read_onboarding
+package com.example.astonlolapp.domain.use_cases.onboarding.read_onboarding
 
 import com.example.astonlolapp.data.repository.Repository
 import kotlinx.coroutines.flow.Flow

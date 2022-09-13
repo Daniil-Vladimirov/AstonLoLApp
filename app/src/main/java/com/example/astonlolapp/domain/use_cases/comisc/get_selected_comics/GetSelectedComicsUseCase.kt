@@ -1,4 +1,4 @@
-package com.example.astonlolapp.domain.use_cases.get_selected_comics
+package com.example.astonlolapp.domain.use_cases.comisc.get_selected_comics
 
 import com.example.astonlolapp.data.repository.Repository
 import com.example.astonlolapp.domain.model.Comics

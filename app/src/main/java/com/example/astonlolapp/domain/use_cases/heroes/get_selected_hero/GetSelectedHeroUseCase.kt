@@ -1,4 +1,4 @@
-package com.example.astonlolapp.domain.use_cases.get_selected_hero
+package com.example.astonlolapp.domain.use_cases.heroes.get_selected_hero
 
 import com.example.astonlolapp.data.repository.Repository
 import com.example.astonlolapp.domain.model.Hero

@@ -22,6 +22,7 @@ class Repository @Inject constructor(
     suspend fun getSelectedHero(heroId: Int): Hero {
         return localDataSourceAbs.getSelectedHero(heroId = heroId)
     }
+
     suspend fun getSelectedComics(comicsId: Int): Comics {
         return localDataSourceAbs.getSelectedComics(comicsId = comicsId)
     }
@@ -37,10 +38,28 @@ class Repository @Inject constructor(
     fun readBoardingState(): Flow<Boolean> {
         return dataStoreOperationsAbs.readOnBoardingState()
     }
-   fun getComics(): Flow<PagingData<Comics>>{
+
+    fun getComics(): Flow<PagingData<Comics>> {
         return localDataSourceAbs.getComics()
     }
-    fun getComicsFromApi(): Flow<PagingData<Comics>>{
+
+    fun getComicsFromApi(): Flow<PagingData<Comics>> {
         return remoteDataSourceAbs.getComicsFromApi()
+    }
+
+    suspend fun deleteFavouriteHero(heroId: Int) {
+        localDataSourceAbs.deleteFavouriteHero(heroId = heroId)
+    }
+
+    suspend fun deleteAllFavouriteHeroes() {
+        localDataSourceAbs.deleteAllFavouriteHeroes()
+    }
+
+    suspend fun addFavouriteHeroes(hero: Hero) {
+        localDataSourceAbs.addFavouriteHeroes(hero = hero)
+    }
+
+    fun getAllFavouriteHeroes(): Flow<PagingData<Hero>> {
+        return localDataSourceAbs.getAllFavouriteHeroes()
     }
 }
