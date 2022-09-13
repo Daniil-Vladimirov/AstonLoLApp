@@ -1,33 +1,47 @@
 package com.example.astonlolapp.presentation.screens.heroes_screen.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.astonlolapp.R
 import com.example.astonlolapp.databinding.HeroListElementBinding
 import com.example.astonlolapp.domain.model.Hero
+import com.example.astonlolapp.presentation.screens.heroes_screen.ListScreenFragmentDirections
+import com.example.astonlolapp.util.Constants
 import timber.log.Timber
 
-class HeroesPagingAdapter() :
-    PagingDataAdapter<Hero, HeroViewHolder>(HERO_DIFF_CALLBACK) {
+class HeroesPagingAdapter(private val listener: Listener) :
+    PagingDataAdapter<Hero, HeroesPagingAdapter.HeroViewHolder>(HERO_DIFF_CALLBACK),
+    View.OnClickListener {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroViewHolder {
-        Timber.d("onCreate")
-      return  HeroViewHolder(
-            HeroListElementBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false,
-            )
-        )
+    override fun onClick(v: View?) {
+        Timber.d("onClickView")
+        val hero = v?.tag as Hero
+        if (v.id == R.id.add_to_favourite_ic) {
+            listener.onHeroAdd(hero = hero)
+        }
     }
+
 
     override fun onBindViewHolder(holder: HeroViewHolder, position: Int) {
         Timber.d("onBindViewHolder")
-        val tile = getItem(position)
-        if (tile != null) {
-            holder.bind(tile)
-        }
+        val hero = getItem(position) ?: return
+        holder.bind(hero)
+        holder.binding.addToFavouriteIc.tag = hero
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroViewHolder {
+        Timber.d("onCreate")
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = HeroListElementBinding.inflate(inflater, parent, false)
+        binding.addToFavouriteIc.setOnClickListener(this)
+        return HeroViewHolder(binding = binding)
     }
 
     companion object {
@@ -37,6 +51,48 @@ class HeroesPagingAdapter() :
 
             override fun areContentsTheSame(oldItem: Hero, newItem: Hero): Boolean =
                 oldItem == newItem
+        }
+    }
+
+    interface Listener {
+        /**
+         * Called when the user taps the "Delete" button in a list item
+         */
+        fun onHeroDelete(hero: Hero)
+
+        /**
+         * Called when the user taps the "Star" button in a list item.
+         */
+        fun onHeroAdd(hero: Hero)
+    }
+
+    class HeroViewHolder(
+        val binding: HeroListElementBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        private var currentHero: Hero? = null
+
+        fun bind(hero: Hero) {
+            currentHero = hero
+            binding.apply {
+                heroImageView.load("${Constants.BASE_URL}${hero.image}")
+                heroNameTextView.text = hero.name
+                heroDescriptionTextView.text = hero.about
+                adTextView.text = hero.ad.toString()
+                apTextView.text = hero.ap.toString()
+                winRateTextView.text = hero.winRate.toString()
+
+            }
+        }
+
+        init {
+            binding.heroImageView.setOnClickListener { view ->
+                currentHero?.let { hero ->
+                    val action =
+                        ListScreenFragmentDirections.actionListScreenFragmentToDetailFragment(hero.id)
+                    view.findNavController().navigate(action)
+                }
+            }
         }
     }
 }

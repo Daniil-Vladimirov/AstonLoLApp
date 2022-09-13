@@ -2,6 +2,7 @@ package com.example.astonlolapp.data.repository
 
 import androidx.paging.PagingData
 import com.example.astonlolapp.domain.model.Comics
+import com.example.astonlolapp.domain.model.FavouriteHero
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.repository.DataStoreOperationsAbs
 import com.example.astonlolapp.domain.repository.LocalDatasourceAbs
@@ -55,11 +56,11 @@ class Repository @Inject constructor(
         localDataSourceAbs.deleteAllFavouriteHeroes()
     }
 
-    suspend fun addFavouriteHeroes(hero: Hero) {
+    suspend fun addFavouriteHeroes(hero: FavouriteHero) {
         localDataSourceAbs.addFavouriteHeroes(hero = hero)
     }
 
-    fun getAllFavouriteHeroes(): Flow<PagingData<Hero>> {
+    fun getAllFavouriteHeroes(): Flow<PagingData<FavouriteHero>> {
         return localDataSourceAbs.getAllFavouriteHeroes()
     }
 }

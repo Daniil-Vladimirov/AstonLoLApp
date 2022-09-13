@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
         bottomNavigation.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.listScreenFragment, R.id.fragmentLocations, R.id.fragmentComics)
+            setOf(R.id.listScreenFragment, R.id.fragmentFavouriteHeroes, R.id.fragmentComics)
         )
 
     }

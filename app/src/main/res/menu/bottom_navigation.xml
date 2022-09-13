@@ -7,7 +7,7 @@
         android:title="Heroes"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/fragmentLocations"
+        android:id="@+id/fragmentFavouriteHeroes"
         android:icon="@drawable/ic_locations"
         android:title="Locations"
         app:showAsAction="ifRoom"/>

@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/fragment_first.xml" value="0.29846014492753625" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable-v24/ic_network_error.xml" value="0.128" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/comics_gradient_background.xml" value="0.1" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/ic_star.xml" value="0.307" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/nav_item_color.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/splash_gradient.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -15,7 +17,7 @@
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/fragment_list_item_loader.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/fragment_list_screen.xml" value="0.25" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/fragment_locations.xml" value="0.13796296296296295" />
-        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/hero_list_element.xml" value="0.1" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/hero_list_element.xml" value="0.5" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/motion_15_parallax.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/onboarding_1.xml" value="0.1778115501519757" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/onboarding_2.xml" value="0.1778115501519757" />

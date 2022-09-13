@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @OptIn(ExperimentalPagerApi::class)
 @AndroidEntryPoint
-class ComicsDetailScreen : Fragment() {
+class ComicsDetailFragment : Fragment() {
 
     private var _binding: FragmentDetailMotionBinding? = null
     private val binding get() = _binding!!
@@ -35,7 +35,7 @@ class ComicsDetailScreen : Fragment() {
                     comicsPictures = comicsDetailViewModel.selectedComics.collectAsState().value?.text,
                     findNavController()
                     )
-                    //navController = navController
+
             }
         }
     }

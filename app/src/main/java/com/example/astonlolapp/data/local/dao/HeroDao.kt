@@ -22,16 +22,4 @@ interface HeroDao {
     @Query("DELETE FROM hero_database_table")
     suspend fun deleteAllHeroes()
 
-    /*FavoriteHeroes*/
-    @Query("DELETE FROM favourite_hero_database_table WHERE id=:heroId")
-    suspend fun deleteFavouriteHero(heroId: Int)
-
-    @Query("DELETE FROM favourite_hero_database_table")
-    suspend fun deleteAllFavouriteHeroes()
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addFavouriteHeroes(hero: Hero)
-
-    @Query("SELECT * FROM favourite_hero_database_table ORDER BY id ASC")
-    fun getAllFavouriteHeroes(): PagingSource<Int, Hero>
 }

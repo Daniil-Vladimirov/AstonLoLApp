@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.astonlolapp.data.local.HeroDatabase
 import com.example.astonlolapp.domain.model.Comics
+import com.example.astonlolapp.domain.model.FavouriteHero
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.repository.LocalDatasourceAbs
 import com.example.astonlolapp.util.Constants
@@ -14,6 +15,7 @@ class LocalDataSourceImp(heroDatabase: HeroDatabase) : LocalDatasourceAbs {
 
     private val heroDao = heroDatabase.heroDao()
     private val comicsDao = heroDatabase.comicsDao()
+    private val favouriteHeroesDao = heroDatabase.favouriteHeroesDao()
 
     override suspend fun getSelectedHero(heroId: Int): Hero {
         return heroDao.getSelectedHero(heroId = heroId)
@@ -37,19 +39,19 @@ class LocalDataSourceImp(heroDatabase: HeroDatabase) : LocalDatasourceAbs {
     }
 
     override suspend fun deleteFavouriteHero(heroId: Int) {
-        heroDao.deleteFavouriteHero(heroId = heroId)
+        favouriteHeroesDao.deleteFavouriteHero(heroId = heroId)
     }
 
     override suspend fun deleteAllFavouriteHeroes() {
-        heroDao.deleteAllFavouriteHeroes()
+        favouriteHeroesDao.deleteAllFavouriteHeroes()
     }
 
-    override suspend fun addFavouriteHeroes(hero: Hero) {
-        heroDao.addFavouriteHeroes(hero = hero)
+    override suspend fun addFavouriteHeroes(hero: FavouriteHero) {
+        favouriteHeroesDao.addFavouriteHeroes(hero = hero)
     }
 
-    override fun getAllFavouriteHeroes(): Flow<PagingData<Hero>> {
-        val pagerFactory = { heroDao.getAllFavouriteHeroes() }
+    override fun getAllFavouriteHeroes(): Flow<PagingData<FavouriteHero>> {
+        val pagerFactory = { favouriteHeroesDao.getAllFavoriteHeroes() }
         return Pager(
             config = PagingConfig(
                 pageSize = Constants.ITEMS_PAGE_SIZE,

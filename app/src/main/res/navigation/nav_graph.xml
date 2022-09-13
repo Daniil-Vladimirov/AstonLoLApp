@@ -33,12 +33,12 @@
             app:destination="@id/comics_detail_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentLocations"
-        android:name="com.example.astonlolapp.presentation.screens.locations_screen.FragmentLocations"
-        android:label="FragmentLocations" />
+        android:id="@+id/fragmentFavouriteHeroes"
+        android:name="com.example.astonlolapp.presentation.screens.favourite_heroes.FavouriteHeroesFragment"
+        android:label="fragment_favourite_heroes" />
     <fragment
         android:id="@+id/comics_detail_fragment"
-        android:name="com.example.astonlolapp.presentation.screens.comics_detail_screen.ComicsDetailScreen"
+        android:name="com.example.astonlolapp.presentation.screens.comics_detail_screen.ComicsDetailFragment"
         android:label="ComposeUIFragment" >
         <argument
             android:name="ComicsId"

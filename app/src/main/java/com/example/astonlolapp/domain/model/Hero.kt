@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 import com.example.astonlolapp.util.Constants.HERO_DATABASE_TABLE
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 @Entity(tableName = HERO_DATABASE_TABLE)
 data class Hero(

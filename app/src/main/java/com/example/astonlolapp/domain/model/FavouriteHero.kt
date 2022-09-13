@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity(tableName = Constants.FAVOURITE_HERO_DATABASE_TABLE)
-data class FavouriteHeroes(
+data class FavouriteHero(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val name: String,
@@ -22,3 +22,20 @@ data class FavouriteHeroes(
     val range: Boolean,
     val abilities: List<String>,
 )
+
+fun Hero.toFavoriteHero(hero: Hero): FavouriteHero {
+    return FavouriteHero(
+        id = hero.id,
+        name = hero.name,
+        image = hero.image,
+        about = hero.about,
+        winRate = hero.winRate,
+        role = hero.role,
+        ad = hero.ad,
+        ap = hero.ap,
+        hp = hero.hp,
+        mp = hero.mp,
+        range = hero.range,
+        abilities = hero.abilities,
+    )
+}

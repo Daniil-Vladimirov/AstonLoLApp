@@ -1,13 +1,6 @@
 package com.example.astonlolapp.presentation.screens.heroes_screen.adapters
 
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.example.astonlolapp.databinding.HeroListElementBinding
-import com.example.astonlolapp.domain.model.Hero
-import com.example.astonlolapp.presentation.screens.heroes_screen.ListScreenFragmentDirections
-import com.example.astonlolapp.util.Constants.BASE_URL
-
+/*
 class HeroViewHolder(
     private val binding: HeroListElementBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -23,11 +16,12 @@ class HeroViewHolder(
             adTextView.text = hero.ad.toString()
             apTextView.text = hero.ap.toString()
             winRateTextView.text = hero.winRate.toString()
+
         }
     }
 
     init {
-        binding.root.setOnClickListener {view->
+        binding.heroImageView.setOnClickListener { view ->
             currentHero?.let { hero ->
                 val action =
                     ListScreenFragmentDirections.actionListScreenFragmentToDetailFragment(hero.id)
@@ -35,4 +29,4 @@ class HeroViewHolder(
             }
         }
     }
-}
+}*/

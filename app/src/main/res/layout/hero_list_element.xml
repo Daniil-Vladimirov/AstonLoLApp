@@ -138,6 +138,18 @@
                     app:layout_constraintStart_toEndOf="@+id/ap_textView"
                     app:layout_constraintTop_toBottomOf="@+id/vin_rate_imageView" />
 
+                <ImageView
+                    android:id="@+id/add_to_favourite_ic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_star"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="@dimen/margin_m"
+                    android:layout_marginTop="@dimen/margin_m"
+                    app:tint="@color/yellow" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>

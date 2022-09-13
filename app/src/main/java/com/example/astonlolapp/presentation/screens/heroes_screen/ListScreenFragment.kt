@@ -61,6 +61,7 @@ class ListScreenFragment :
             fetchHeroes()
         }
 
+
         return binding.root
 
     }
@@ -81,7 +82,7 @@ class ListScreenFragment :
     private fun initMembers() {
         Timber.d("InitMembers")
         heroes = listScreenViewModel.allHeroes
-        heroAdapter = HeroesPagingAdapter()
+        heroAdapter = HeroesPagingAdapter(listScreenViewModel)
     }
 
     private fun fetchHeroes() {
