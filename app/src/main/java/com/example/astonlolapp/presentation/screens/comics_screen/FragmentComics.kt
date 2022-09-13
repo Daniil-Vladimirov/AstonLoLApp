@@ -13,7 +13,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.astonlolapp.databinding.FragmentComicsBinding
+import com.example.astonlolapp.util.simpleScan
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -89,20 +91,21 @@ class FragmentComics :
     }
 
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun handleLoadingState() {
         lifecycleScope.launch {
-            comicsAdapter.loadStateFlow.collectLatest { loadState ->
-                binding.comicsErrorMsg.isVisible = comicsAdapter.itemCount < 1
-                binding.comicsRetryButton.isVisible = comicsAdapter.itemCount < 1
-                binding.comicsProgressBar.isVisible = loadState.source.refresh is LoadState.Loading
+            comicsAdapter.loadStateFlow.simpleScan(2).collectLatest { (prevState, currentState) ->
+                binding.comicsErrorMsg.isVisible = (currentState?.refresh is LoadState.Error ||
+                        prevState?.refresh is LoadState.Error) && comicsAdapter.itemCount < 1
+                binding.comicsRetryButton.isVisible = (currentState?.refresh is LoadState.Error ||
+                        prevState?.refresh is LoadState.Error) && comicsAdapter.itemCount < 1
+                binding.comicsProgressBar.isVisible =
+                    currentState?.refresh is LoadState.Loading && comicsAdapter.itemCount < 1
                 binding.comicsSwipeToRefresh.isRefreshing =
-                    comicsAdapter.itemCount < 1 || loadState.source.refresh !is LoadState.NotLoading
-
-
+                    currentState?.refresh is LoadState.Loading && binding.comicsProgressBar.isVisible == false
             }
         }
     }
-
 
     private fun setupSwipeToRefresh() {
         binding.comicsSwipeToRefresh.setOnRefreshListener {

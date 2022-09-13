@@ -1,4 +1,4 @@
-package com.example.astonlolapp.presentation.screens.heroes_screen
+package com.example.astonlolapp.presentation.screens.heroes_screen.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

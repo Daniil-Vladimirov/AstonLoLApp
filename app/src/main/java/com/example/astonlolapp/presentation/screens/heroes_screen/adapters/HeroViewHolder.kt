@@ -1,10 +1,11 @@
-package com.example.astonlolapp.presentation.screens.heroes_screen
+package com.example.astonlolapp.presentation.screens.heroes_screen.adapters
 
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.astonlolapp.databinding.HeroListElementBinding
 import com.example.astonlolapp.domain.model.Hero
+import com.example.astonlolapp.presentation.screens.heroes_screen.ListScreenFragmentDirections
 import com.example.astonlolapp.util.Constants.BASE_URL
 
 class HeroViewHolder(
@@ -28,7 +29,8 @@ class HeroViewHolder(
     init {
         binding.root.setOnClickListener {view->
             currentHero?.let { hero ->
-                val action = ListScreenFragmentDirections.actionListScreenFragmentToDetailFragment(hero.id)
+                val action =
+                    ListScreenFragmentDirections.actionListScreenFragmentToDetailFragment(hero.id)
                 view.findNavController().navigate(action)
             }
         }

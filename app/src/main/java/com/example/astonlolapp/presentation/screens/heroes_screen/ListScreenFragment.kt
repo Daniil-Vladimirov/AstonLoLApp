@@ -16,12 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astonlolapp.databinding.FragmentListScreenBinding
 import com.example.astonlolapp.domain.model.Hero
+import com.example.astonlolapp.presentation.screens.heroes_screen.adapters.HeroesPagingAdapter
+import com.example.astonlolapp.util.simpleScan
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @AndroidEntryPoint
 class ListScreenFragment :
     Fragment() {
@@ -46,14 +50,17 @@ class ListScreenFragment :
         // Inflate the layout for this fragment
         _binding = FragmentListScreenBinding.inflate(inflater, container, false)
 
-        binding.retryButton.setOnClickListener {
-            fetchHeroes()
-        }
+
         initMembers()
         setupViews(binding)
         fetchHeroes()
         handleLoadingState()
         setupSwipeToRefresh()
+
+        binding.retryButton.setOnClickListener {
+            fetchHeroes()
+        }
+
         return binding.root
 
     }
@@ -81,27 +88,33 @@ class ListScreenFragment :
         Timber.d("fetchHeroes")
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                heroes.collectLatest {
-                    heroAdapter.submitData(it)
+                listScreenViewModel.allHeroes.collectLatest { heroes ->
+                    heroAdapter.submitData(heroes)
                 }
             }
         }
     }
 
+
     private fun handleLoadingState() {
         lifecycleScope.launch {
-            heroAdapter.loadStateFlow.collectLatest { loadState ->
-                binding.errorMsg.isVisible = heroAdapter.itemCount < 1
-                binding.retryButton.isVisible = heroAdapter.itemCount < 1
-                binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+            heroAdapter.loadStateFlow.simpleScan(2).collectLatest { (prevState, currentState) ->
+                binding.errorMsg.isVisible =
+                    currentState?.refresh is LoadState.Error ||
+                            prevState?.refresh is LoadState.Error
+                binding.retryButton.isVisible = currentState?.refresh is LoadState.Error ||
+                        prevState?.refresh is LoadState.Error
+                binding.progressBar.isVisible = currentState?.refresh is LoadState.Loading
+                binding.swipeToRefreshLayout.isRefreshing =
+                    currentState?.refresh is LoadState.Loading && binding.progressBar.isVisible == false
 
             }
         }
     }
+
     private fun setupSwipeToRefresh() {
         binding.swipeToRefreshLayout.setOnRefreshListener {
             fetchHeroes()
-            binding.swipeToRefreshLayout.isRefreshing = false
         }
     }
 }
