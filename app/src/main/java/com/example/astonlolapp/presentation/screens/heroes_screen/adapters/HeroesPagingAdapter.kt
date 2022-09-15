@@ -24,6 +24,7 @@ class HeroesPagingAdapter(private val listener: Listener) :
         val hero = v?.tag as Hero
         if (v.id == R.id.add_to_favourite_ic) {
             listener.onHeroAdd(hero = hero)
+            listener.setColorAsFavourite(v, favouriteHero = hero)
         }
     }
 
@@ -64,6 +65,7 @@ class HeroesPagingAdapter(private val listener: Listener) :
          * Called when the user taps the "Star" button in a list item.
          */
         fun onHeroAdd(hero: Hero)
+        fun setColorAsFavourite(view: View, favouriteHero: Hero)
     }
 
     class HeroViewHolder(

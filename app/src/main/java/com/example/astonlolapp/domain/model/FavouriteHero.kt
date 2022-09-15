@@ -23,19 +23,36 @@ data class FavouriteHero(
     val abilities: List<String>,
 )
 
-fun Hero.toFavoriteHero(hero: Hero): FavouriteHero {
+fun Hero.toFavoriteHero(): FavouriteHero {
     return FavouriteHero(
-        id = hero.id,
-        name = hero.name,
-        image = hero.image,
-        about = hero.about,
-        winRate = hero.winRate,
-        role = hero.role,
-        ad = hero.ad,
-        ap = hero.ap,
-        hp = hero.hp,
-        mp = hero.mp,
-        range = hero.range,
-        abilities = hero.abilities,
+        id = this.id,
+        name = this.name,
+        image = this.image,
+        about = this.about,
+        winRate = this.winRate,
+        role = this.role,
+        ad = this.ad,
+        ap = this.ap,
+        hp = this.hp,
+        mp = this.mp,
+        range = this.range,
+        abilities = this.abilities,
+    )
+}
+
+fun FavouriteHero.toHero(): Hero {
+    return Hero(
+        id = this.id,
+        name = this.name,
+        image = this.image,
+        about = this.about,
+        winRate = this.winRate,
+        role = this.role,
+        ad = this.ad,
+        ap = this.ap,
+        hp = this.hp,
+        mp = this.mp,
+        range = this.range,
+        abilities = this.abilities,
     )
 }

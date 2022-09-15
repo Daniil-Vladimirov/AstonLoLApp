@@ -1,4 +1,4 @@
-package com.example.astonlolapp.domain.use_cases.get_all_heroes
+package com.example.astonlolapp.domain.use_cases.heroes.get_all_heroes
 
 import androidx.paging.PagingData
 import com.example.astonlolapp.data.repository.Repository

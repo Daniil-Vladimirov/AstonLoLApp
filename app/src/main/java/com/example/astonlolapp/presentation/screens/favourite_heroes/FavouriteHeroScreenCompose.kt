@@ -15,6 +15,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 fun FavouriteHeroScreenCompose(
     navController: NavController,
+    onSwipeToDelete: (Int) -> Unit,
     favouriteHeroViewModel: FavouriteHeroesViewModel
 ) {
     val allHeroes = favouriteHeroViewModel.getAllFavouriteHeroes.collectAsLazyPagingItems()
@@ -27,7 +28,8 @@ fun FavouriteHeroScreenCompose(
     Column(modifier = Modifier.fillMaxSize()) {
         ListContent(
             heroes = allHeroes,
-            navController = navController
+            navController = navController,
+            onSwipeToDelete = onSwipeToDelete
         )
     }
 

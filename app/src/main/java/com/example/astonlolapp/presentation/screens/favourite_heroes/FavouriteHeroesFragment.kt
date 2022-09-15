@@ -28,9 +28,11 @@ class FavouriteHeroesFragment : Fragment() {
             setContent {
                 FavouriteHeroScreenCompose(
                     navController = findNavController(),
-                    favouriteHeroViewModel = favouriteHeroesViewModel
+                    favouriteHeroViewModel = favouriteHeroesViewModel,
+                    onSwipeToDelete = {
+                        favouriteHeroesViewModel.deleteFavouriteHero(it)
+                    }
                 )
-
             }
         }
     }

@@ -62,6 +62,7 @@ class ListScreenFragment :
         }
 
 
+
         return binding.root
 
     }
@@ -101,13 +102,16 @@ class ListScreenFragment :
         lifecycleScope.launch {
             heroAdapter.loadStateFlow.simpleScan(2).collectLatest { (prevState, currentState) ->
                 binding.errorMsg.isVisible =
-                    currentState?.refresh is LoadState.Error ||
-                            prevState?.refresh is LoadState.Error
-                binding.retryButton.isVisible = currentState?.refresh is LoadState.Error ||
-                        prevState?.refresh is LoadState.Error
+                    currentState?.refresh is LoadState.Error && heroAdapter.itemCount < 1 ||
+                            prevState?.refresh is LoadState.Error && heroAdapter.itemCount < 1
+                binding.retryButton.isVisible = currentState?.refresh is LoadState.Error
+                        && heroAdapter.itemCount < 1 ||
+                        prevState?.refresh is LoadState.Error && heroAdapter.itemCount < 1
                 binding.progressBar.isVisible = currentState?.refresh is LoadState.Loading
+                        && heroAdapter.itemCount < 1
                 binding.swipeToRefreshLayout.isRefreshing =
                     currentState?.refresh is LoadState.Loading && binding.progressBar.isVisible == false
+                            && heroAdapter.itemCount < 1
 
             }
         }
@@ -118,6 +122,7 @@ class ListScreenFragment :
             fetchHeroes()
         }
     }
+
 }
 
 
