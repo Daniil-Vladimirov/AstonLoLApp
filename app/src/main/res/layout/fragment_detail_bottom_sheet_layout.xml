@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- В данном layout содержится верхняя часть, которая не будет изменяться при изменении состояния
-    В данном кейсе его можно заменить на TextView с compound drawable, но я оставлю LinearLayout для наглядности-->
+
     <LinearLayout
         android:id="@+id/layout_top"
         android:layout_width="match_parent"
@@ -19,7 +18,7 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:importantForAccessibility="no"
-            app:srcCompat="@drawable/ic_launcher_foreground"
+            app:srcCompat="@drawable/rank"
             app:tint="#32CD32" />
 
         <TextView
@@ -28,12 +27,10 @@
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Text and image in linear layout"
             android:textSize="20sp" />
 
     </LinearLayout>
 
-    <!-- В данном layout содержится разметка для collapsed состояния фрагмента -->
     <LinearLayout
         android:id="@+id/layout_collapsed"
         android:layout_width="match_parent"
@@ -46,7 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center"
-            android:text="Text about something"
             android:textSize="24sp"
             android:textStyle="italic" />
 
@@ -54,13 +50,11 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:gravity="center"
-            android:text="Some element, for example RecyclerView"
             android:textSize="32sp" />
 
     </LinearLayout>
 
-    <!-- В данном layout содержится разметка для развёрнутого состояния фрагмента
-    Изначально она находится в состоянии invisible и располагается под layout_top как и layout_collapsed-->
+
     <LinearLayout
         android:id="@+id/layout_expanded"
         android:layout_width="match_parent"

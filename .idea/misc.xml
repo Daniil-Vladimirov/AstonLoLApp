@@ -4,12 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp/app/src/main/res/layout/fragment_first.xml" value="0.29846014492753625" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable-v24/ic_network_error.xml" value="0.128" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/bottom_sheet_background.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/comics_gradient_background.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/ic_comics.xml" value="0.119" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/ic_error_placeholder.xml" value="0.1365" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/ic_not_favourite.xml" value="0.1025" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/ic_star.xml" value="0.307" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/ic_statr_icon_background.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/nav_item_color.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/drawable/splash_gradient.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -32,6 +36,8 @@
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/layout/onboarding_viewpager.xml" value="0.1778115501519757" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/menu/bottom_navigation.xml" value="0.358974358974359" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/menu/menu_main.xml" value="0.365625" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/xml/motion_loader.xml" value="0.1773049645390071" />
         <entry key="..\:/Users/Daniil/Downloads/AstonLoLApp12/app/src/main/res/xml/tool_bar.xml" value="0.1" />
       </map>

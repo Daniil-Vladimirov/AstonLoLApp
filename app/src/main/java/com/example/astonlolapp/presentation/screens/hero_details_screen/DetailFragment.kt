@@ -53,7 +53,7 @@ class DetailFragment : Fragment() {
         val appBarLayout: AppBarLayout = binding.appbarLayout
         val motionLayout: MotionLayout = binding.motionLayout
 
-        val listener = AppBarLayout.OnOffsetChangedListener { unused, verticalOffset ->
+        val listener = AppBarLayout.OnOffsetChangedListener {_, verticalOffset ->
             val seekPosition = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
             motionLayout.progress = seekPosition
         }
