@@ -59,6 +59,9 @@ class Repository @Inject constructor(
     suspend fun addFavouriteHeroes(hero: FavouriteHero) {
         localDataSourceAbs.addFavouriteHeroes(hero = hero)
     }
+    suspend fun addHeroAsFavourite(hero: Hero) {
+        localDataSourceAbs.addHeroAsFavourite(hero = hero)
+    }
 
     fun getAllFavouriteHeroes(): Flow<PagingData<FavouriteHero>> {
         return localDataSourceAbs.getAllFavouriteHeroes()

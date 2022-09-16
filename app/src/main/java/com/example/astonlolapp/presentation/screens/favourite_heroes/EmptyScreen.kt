@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.example.astonlolapp.R
-import com.example.astonlolapp.domain.model.FavouriteHero
+import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.ui.DarkGray
 import com.example.astonlolapp.ui.LightGray
 import com.example.astonlolapp.ui.NETWORK_ERROR_ICON_HEIGHT
@@ -35,7 +35,7 @@ import java.net.SocketTimeoutException
 @Composable
 fun EmptyScreen(
     error: LoadState.Error? = null,
-    heroes: LazyPagingItems<FavouriteHero>? = null
+    heroes: LazyPagingItems<Hero>? = null
 ) {
     var message by remember {
         mutableStateOf("Find your Favorite Hero!")
@@ -75,7 +75,7 @@ fun EmptyContent(
     icon: Int,
     message: String,
     error: LoadState.Error? = null,
-    heroes: LazyPagingItems<FavouriteHero>? = null
+    heroes: LazyPagingItems<Hero>? = null
 ) {
     var isRefreshing by remember { mutableStateOf(false) }
 

@@ -12,6 +12,7 @@ import com.example.astonlolapp.domain.use_cases.favorite_heroes.add_favourite_he
 import com.example.astonlolapp.domain.use_cases.favorite_heroes.delete_all_favourite_heroes.DeleteAllFavouriteHeroesUseCase
 import com.example.astonlolapp.domain.use_cases.favorite_heroes.delete_favourite_hero.DeleteFavouriteHeroUseCase
 import com.example.astonlolapp.domain.use_cases.favorite_heroes.get_all_favourite_heroes.GetAllFavouriteHeroesUseCase
+import com.example.astonlolapp.domain.use_cases.heroes.add_hero_as_favourite.AddHeroAsFavouriteUseCase
 import com.example.astonlolapp.domain.use_cases.heroes.get_all_heroes.GetAllHeroesUseCase
 import com.example.astonlolapp.domain.use_cases.heroes.get_selected_hero.GetSelectedHeroUseCase
 import com.example.astonlolapp.domain.use_cases.heroes.search_heroes.SearchHeroesUseCase
@@ -51,6 +52,7 @@ object RepositoryModule {
             deleteAllFavouriteHeroes = DeleteAllFavouriteHeroesUseCase(repository = repository),
             getAllFavouriteHeroesUseCase = GetAllFavouriteHeroesUseCase(repository = repository),
             deleteFavouriteHeroUseCase = DeleteFavouriteHeroUseCase(repository = repository),
+            addHeroAsFavouriteUseCase = AddHeroAsFavouriteUseCase(repository = repository)
         )
     }
 

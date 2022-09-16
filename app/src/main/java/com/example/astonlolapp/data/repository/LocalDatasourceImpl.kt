@@ -62,4 +62,8 @@ class LocalDataSourceImp(heroDatabase: HeroDatabase) : LocalDatasourceAbs {
             }
         ).flow
     }
+
+    override suspend fun addHeroAsFavourite(hero: Hero) {
+        heroDao.addHeroAsFavourite(hero = hero)
+    }
 }

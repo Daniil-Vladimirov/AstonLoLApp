@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.filter
 import androidx.paging.map
 import com.example.astonlolapp.domain.model.Hero
-import com.example.astonlolapp.domain.model.toFavoriteHero
 import com.example.astonlolapp.domain.model.toHero
 import com.example.astonlolapp.domain.use_cases.UseCases
 import com.example.astonlolapp.presentation.screens.heroes_screen.adapters.HeroesPagingAdapter
@@ -30,10 +29,10 @@ class ListScreenViewModel @Inject constructor(
         //TODO
     }
 
-    override fun onHeroAdd(hero: Hero) {
+    override fun addToFavourite(hero: Hero) {
         Timber.d("addHeroClicked")
         viewModelScope.launch(Dispatchers.IO) {
-            useCases.addFavouriteHeroes(hero = hero.toFavoriteHero())
+            useCases.addHeroAsFavouriteUseCase(hero = hero)
             Timber.d("$hero")
         }
     }

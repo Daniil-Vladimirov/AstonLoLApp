@@ -29,7 +29,7 @@ import androidx.paging.compose.items
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.astonlolapp.domain.model.FavouriteHero
+import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.ui.*
 import com.example.astonlolapp.util.Constants.BASE_URL
 import kotlinx.coroutines.delay
@@ -39,7 +39,7 @@ import kotlinx.coroutines.launch
 @ExperimentalCoilApi
 @Composable
 fun ListContent(
-    heroes: LazyPagingItems<FavouriteHero>,
+    heroes: LazyPagingItems<Hero>,
     onSwipeToDelete: (Int) -> Unit,
     navController: NavController
 ) {
@@ -114,7 +114,7 @@ fun ListContent(
 
 @Composable
 fun handlePagingResult(
-    heroes: LazyPagingItems<FavouriteHero>
+    heroes: LazyPagingItems<Hero>
 ): Boolean {
     heroes.apply {
         val error = when {
@@ -145,7 +145,7 @@ fun handlePagingResult(
 @ExperimentalCoilApi
 @Composable
 fun HeroItem(
-    hero: FavouriteHero?,
+    hero: Hero?,
     navController: NavController
 ) {
 

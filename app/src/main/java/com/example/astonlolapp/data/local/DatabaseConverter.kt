@@ -1,11 +1,9 @@
 package com.example.astonlolapp.data.local
 
 import androidx.room.TypeConverter
-import com.google.gson.Gson
 
 class DatabaseConverter {
 
-    var gson = Gson()
     private val separator = ","
 
     @TypeConverter

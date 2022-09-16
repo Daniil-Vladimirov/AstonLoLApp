@@ -1,8 +1,10 @@
 package com.example.astonlolapp.presentation.screens.heroes_screen.adapters
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -23,7 +25,7 @@ class HeroesPagingAdapter(private val listener: Listener) :
         Timber.d("onClickView")
         val hero = v?.tag as Hero
         if (v.id == R.id.add_to_favourite_ic) {
-            listener.onHeroAdd(hero = hero)
+            listener.addToFavourite(hero = hero)
             listener.setColorAsFavourite(v, favouriteHero = hero)
         }
     }
@@ -33,7 +35,23 @@ class HeroesPagingAdapter(private val listener: Listener) :
         Timber.d("onBindViewHolder")
         val hero = getItem(position) ?: return
         holder.bind(hero)
-        holder.binding.addToFavouriteIc.tag = hero
+        with(holder.binding){
+            root.tag = hero
+            addToFavouriteIc.tag = hero
+            addToFavouriteIc.setImageResource(
+                if (hero.isFavourite == true)
+                    R.drawable.ic_favourite
+                else
+                    R.drawable.ic_not_favourite
+            )
+            val tintColor = if (hero.isFavourite == true)
+                R.color.yellow
+            else
+                R.color.lightGray
+            addToFavouriteIc.imageTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(root.context, tintColor)
+            )
+        }
     }
 
 
@@ -64,7 +82,7 @@ class HeroesPagingAdapter(private val listener: Listener) :
         /**
          * Called when the user taps the "Star" button in a list item.
          */
-        fun onHeroAdd(hero: Hero)
+        fun addToFavourite(hero: Hero)
         fun setColorAsFavourite(view: View, favouriteHero: Hero)
     }
 

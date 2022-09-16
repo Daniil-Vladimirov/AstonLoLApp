@@ -14,4 +14,6 @@ interface LocalDatasourceAbs {
     suspend fun deleteAllFavouriteHeroes()
     suspend fun addFavouriteHeroes(hero: FavouriteHero)
     fun getAllFavouriteHeroes(): Flow<PagingData<FavouriteHero>>
+    suspend fun addHeroAsFavourite(hero: Hero)
+
 }

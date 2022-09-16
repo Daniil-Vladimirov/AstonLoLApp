@@ -22,4 +22,7 @@ interface HeroDao {
     @Query("DELETE FROM hero_database_table")
     suspend fun deleteAllHeroes()
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addHeroAsFavourite(hero: Hero)
+
 }
