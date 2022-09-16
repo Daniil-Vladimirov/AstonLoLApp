@@ -5,17 +5,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
+import com.example.astonlolapp.domain.model.Hero
+import com.example.astonlolapp.presentation.screens.favourite_heroes.compose.ListContent
 import com.example.astonlolapp.ui.statusBarColor
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @ExperimentalCoilApi
 @Composable
 fun FavouriteHeroScreenCompose(
-    navController: NavController,
-    onSwipeToDelete: (Int) -> Unit,
+    onSwipeToDelete: (Hero) -> Unit,
     favouriteHeroViewModel: FavouriteHeroesViewModel
 ) {
     val allHeroes = favouriteHeroViewModel.getAllFavouriteHeroes.collectAsLazyPagingItems()
@@ -28,7 +28,6 @@ fun FavouriteHeroScreenCompose(
     Column(modifier = Modifier.fillMaxSize()) {
         ListContent(
             heroes = allHeroes,
-            navController = navController,
             onSwipeToDelete = onSwipeToDelete
         )
     }

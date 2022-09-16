@@ -4,17 +4,17 @@
     <item
         android:id="@+id/listScreenFragment"
         android:icon="@drawable/ic_hero_list"
-        android:title="Heroes"
+        android:title="@string/heroes"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/fragmentFavouriteHeroes"
-        android:icon="@drawable/ic_locations"
-        android:title="Locations"
+        android:icon="@drawable/ic_small_star"
+        android:title="@string/favourites"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/fragmentComics"
         android:icon="@drawable/ic_comics"
-        android:title="Comics"
+        android:title="@string/comics"
         app:showAsAction="ifRoom"/>
 
 </menu>

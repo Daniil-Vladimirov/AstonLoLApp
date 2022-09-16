@@ -3,6 +3,7 @@ package com.example.astonlolapp.presentation.screens.favourite_heroes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.filter
+import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.use_cases.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,9 +20,9 @@ class FavouriteHeroesViewModel @Inject constructor(val useCases: UseCases) : Vie
         }
     }
 
-    fun deleteFavouriteHero(heroId: Int) {
+    fun deleteFavouriteHero(hero: Hero) {
         viewModelScope.launch(Dispatchers.IO) {
-            useCases.deleteFavouriteHeroUseCase(heroId)
+            useCases.addHeroAsFavouriteUseCase(hero)
         }
     }
 }

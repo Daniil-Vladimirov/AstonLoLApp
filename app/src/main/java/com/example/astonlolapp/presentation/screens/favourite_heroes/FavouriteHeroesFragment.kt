@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import coil.annotation.ExperimentalCoilApi
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +26,6 @@ class FavouriteHeroesFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 FavouriteHeroScreenCompose(
-                    navController = findNavController(),
                     favouriteHeroViewModel = favouriteHeroesViewModel,
                     onSwipeToDelete = {
                         favouriteHeroesViewModel.deleteFavouriteHero(it)
