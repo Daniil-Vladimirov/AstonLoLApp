@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/fragmentComics"
-        android:name="com.example.astonlolapp.presentation.screens.comics_screen.FragmentComics"
+        android:name="com.example.astonlolapp.presentation.screens.comics_screen.ComicsFragment"
         android:label="fragment_comics"
         tools:layout="@layout/fragment_comics" >
         <action

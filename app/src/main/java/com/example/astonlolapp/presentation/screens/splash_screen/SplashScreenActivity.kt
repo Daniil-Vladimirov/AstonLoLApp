@@ -37,18 +37,11 @@ class SplashScreenActivity : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-
-        // This is used to hide the status bar and make
-        // the splash screen as a full screen activity.
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        // HERE WE ARE TAKING THE REFERENCE OF OUR IMAGE
-        // SO THAT WE CAN PERFORM ANIMATION USING THAT IMAGE
         val backgroundImage: ImageView = findViewById(R.id.SplashScreenImage)
         val slideAnimation = AnimationUtils.loadAnimation(this, R.anim.top_slide)
         backgroundImage.startAnimation(slideAnimation)

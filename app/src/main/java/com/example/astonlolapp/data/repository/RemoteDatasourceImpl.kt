@@ -7,7 +7,6 @@ import androidx.paging.PagingData
 import com.example.astonlolapp.data.local.HeroDatabase
 import com.example.astonlolapp.data.paging_source.ComicsSource
 import com.example.astonlolapp.data.paging_source.HeroRemoteMediator
-import com.example.astonlolapp.data.paging_source.SearchHeroSource
 import com.example.astonlolapp.data.remote.HeroApi
 import com.example.astonlolapp.domain.model.Comics
 import com.example.astonlolapp.domain.model.Hero
@@ -41,21 +40,6 @@ class RemoteDataSourceImpl
         ).flow
     }
 
-    override fun searchHeroes(query: String): Flow<PagingData<Hero>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = ITEMS_PAGE_SIZE,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = {
-                SearchHeroSource(
-                    heroApi = heroApi,
-                    query = query
-                )
-            }
-        ).flow
-
-    }
 
     override fun getComicsFromApi(): Flow<PagingData<Comics>> {
         return Pager(

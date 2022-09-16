@@ -8,6 +8,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.annotation.ExperimentalCoilApi
+import com.example.astonlolapp.presentation.screens.favourite_heroes.compose.FavouriteHeroScreenCompose
 import dagger.hilt.android.AndroidEntryPoint
 
 @OptIn(ExperimentalCoilApi::class)

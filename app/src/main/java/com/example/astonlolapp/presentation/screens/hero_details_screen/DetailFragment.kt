@@ -12,11 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import coil.load
 import com.example.astonlolapp.databinding.FragmentDetailMotionBinding
+import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.util.Constants.BASE_URL
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -33,20 +33,14 @@ class DetailFragment : Fragment() {
     ): View {
         _binding = FragmentDetailMotionBinding.inflate(inflater, container, false)
 
-        Timber.d("onCreateView")
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 detailScreenViewModel.selectedHero.collect { hero ->
-                    binding.background.load("${BASE_URL}${hero?.image}")
+                    setView(binding = binding, hero = hero)
                 }
             }
         }
-
         coordinateMotion(binding = binding)
-
-
-
-
         return binding.root
     }
 
@@ -64,7 +58,14 @@ class DetailFragment : Fragment() {
             motionLayout.progress = seekPosition
         }
         appBarLayout.addOnOffsetChangedListener(listener)
+    }
 
+    private fun setView(binding: FragmentDetailMotionBinding, hero: Hero?) {
+        with(binding) {
+            background.load("${BASE_URL}${hero?.image}")
+            detailsHeroNameTextView.text = hero?.name
+            aboutTextView.text = hero?.about
+        }
     }
 }
 

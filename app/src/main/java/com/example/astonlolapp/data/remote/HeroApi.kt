@@ -11,11 +11,6 @@ interface HeroApi {
         @Query("page") page: Int = 1
     ): ApiResponse
 
-    @GET("lol/heroes/search")
-    suspend fun searchHeroes(
-        @Query("name") name: String
-    ): ApiResponse
-
     @GET("lol/comics")
     suspend fun getComics(): ApiResponse
 

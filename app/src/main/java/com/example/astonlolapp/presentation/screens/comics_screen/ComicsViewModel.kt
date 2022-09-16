@@ -9,7 +9,7 @@ import javax.inject.Inject
 class ComicsViewModel @Inject constructor(val useCases: UseCases) : ViewModel() {
 
 
-    var comics = useCases.getComicsUseCase()
+    var comicsCache = useCases.getComicsFromCacheUseCase()
     val comicsApi = useCases.getComicsFromApiUseCase()
 
 }

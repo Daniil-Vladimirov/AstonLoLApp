@@ -5,13 +5,14 @@
     android:id="@+id/fragment_list_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_500"
+    android:background="@color/lightMediumGray"
     tools:context=".MainActivity">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/comics_swipe_to_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layoutAnimation="@anim/layout_recycler_view_animation">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/comics_recycler_view"

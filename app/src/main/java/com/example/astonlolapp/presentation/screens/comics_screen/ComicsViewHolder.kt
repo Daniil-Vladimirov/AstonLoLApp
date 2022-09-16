@@ -24,7 +24,7 @@ class ComicsViewHolder(
     init {
         binding.root.setOnClickListener {view->
             currentComics?.let { comics ->
-                val action = FragmentComicsDirections.actionFragmentComicsToComposeUIFragment(comics.id)
+                val action = ComicsFragmentDirections.actionFragmentComicsToComposeUIFragment(comics.id)
                 view.findNavController().navigate(action)
             }
         }

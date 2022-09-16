@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.astonlolapp.domain.use_cases.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +23,4 @@ class SplashViewModel @Inject constructor(useCases: UseCases): ViewModel() {
                 useCases.readOnboardingUseCase().stateIn(viewModelScope).value
         }
     }
-
-
-
 }

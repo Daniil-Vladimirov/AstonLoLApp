@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class FragmentComics :
+class ComicsFragment :
     Fragment() {
 
 
@@ -35,7 +35,6 @@ class FragmentComics :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         comicsAdapter = ComicsPagingAdapter()
-        Timber.tag("FragmentComics").d("OnCreate")
 
     }
 
@@ -74,7 +73,7 @@ class FragmentComics :
     private fun loadDataFromCache() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                comicsScreenViewModel.comics.collectLatest { comics ->
+                comicsScreenViewModel.comicsCache.collectLatest { comics ->
                     comicsAdapter.submitData(comics)
                     binding.comicsSwipeToRefresh.isRefreshing = false
                 }
@@ -124,7 +123,6 @@ class FragmentComics :
         }
 
     }
-
 
 }
 

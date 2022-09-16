@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astonlolapp.databinding.FragmentListScreenBinding
 import com.example.astonlolapp.domain.model.Hero
-import com.example.astonlolapp.presentation.screens.heroes_screen.adapters.HeroesPagingAdapter
 import com.example.astonlolapp.util.simpleScan
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,10 +45,8 @@ class ListScreenFragment :
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Timber.d("onCreate")
         // Inflate the layout for this fragment
         _binding = FragmentListScreenBinding.inflate(inflater, container, false)
-
 
         initMembers()
         setupViews(binding)
@@ -60,7 +57,6 @@ class ListScreenFragment :
         binding.retryButton.setOnClickListener {
             fetchHeroes()
         }
-
 
 
         return binding.root
@@ -78,16 +74,15 @@ class ListScreenFragment :
         binding.recyclerview.layoutManager = LinearLayoutManager(context)
         binding.recyclerview.adapter = heroAdapter
 
+
     }
 
     private fun initMembers() {
-        Timber.d("InitMembers")
         heroes = listScreenViewModel.allHeroes
         heroAdapter = HeroesPagingAdapter(listScreenViewModel)
     }
 
     private fun fetchHeroes() {
-        Timber.d("fetchHeroes")
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 listScreenViewModel.allHeroes.collectLatest { heroes ->

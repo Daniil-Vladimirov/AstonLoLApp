@@ -7,7 +7,6 @@ import com.example.astonlolapp.data.remote.HeroApi
 import com.example.astonlolapp.domain.model.Comics
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 
 class ComicsSource(
@@ -18,10 +17,7 @@ class ComicsSource(
     private val comicsDao = heroDatabase.comicsDao()
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Comics> {
 
-        val pageIndex = params.key ?: 0
-
         return try {
-            Timber.d("Comics Source is calle")
             val apiResponse = heroApi.getComics()
             val comics = apiResponse.comics
                withContext(Dispatchers.IO) {
@@ -36,7 +32,6 @@ class ComicsSource(
                     nextKey = apiResponse.nextPage
                 )
             } else {
-                Timber.d("comics are empty")
                 LoadResult.Page(
                     data = emptyList(),
                     prevKey = null,
@@ -44,7 +39,6 @@ class ComicsSource(
                 )
             }
         } catch (e: Exception) {
-            Timber.d("$e")
             LoadResult.Error(e)
         }
     }
@@ -52,12 +46,5 @@ class ComicsSource(
     override fun getRefreshKey(state: PagingState<Int, Comics>): Int? {
         return state.anchorPosition
     }
-
-    /*private suspend fun cacheComics(apiResponse: ApiResponse): List<Comics> =
-        withContext(Dispatchers.IO) {
-            val comics = apiResponse.comics
-            comicsDao.addComics(comics)
-            return@withContext comicsDao.getComics()
-        }*/
 
 }

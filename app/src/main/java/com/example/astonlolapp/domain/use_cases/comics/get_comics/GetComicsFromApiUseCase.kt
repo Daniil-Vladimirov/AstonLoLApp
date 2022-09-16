@@ -1,4 +1,4 @@
-package com.example.astonlolapp.domain.use_cases.comisc.get_comics
+package com.example.astonlolapp.domain.use_cases.comics.get_comics
 
 import androidx.paging.PagingData
 import com.example.astonlolapp.data.repository.Repository

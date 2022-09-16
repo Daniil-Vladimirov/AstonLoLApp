@@ -6,16 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.astonlolapp.data.local.dao.ComicsDao
-import com.example.astonlolapp.data.local.dao.FavouriteHeroesDao
 import com.example.astonlolapp.data.local.dao.HeroDao
 import com.example.astonlolapp.data.local.dao.HeroRemoteKeysDao
 import com.example.astonlolapp.domain.model.Comics
-import com.example.astonlolapp.domain.model.FavouriteHero
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.model.HeroRemoteKeys
 
 @Database(
-    entities = [Hero::class, HeroRemoteKeys::class, Comics::class, FavouriteHero::class],
+    entities = [Hero::class, HeroRemoteKeys::class, Comics::class],
     version = 1,
     exportSchema = false
 )
@@ -46,5 +44,4 @@ abstract class HeroDatabase : RoomDatabase() {
     abstract fun heroDao(): HeroDao
     abstract fun heroRemoteKeyDao(): HeroRemoteKeysDao
     abstract fun comicsDao(): ComicsDao
-    abstract fun favouriteHeroesDao(): FavouriteHeroesDao
 }

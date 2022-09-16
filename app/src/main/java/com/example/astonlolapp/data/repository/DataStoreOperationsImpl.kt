@@ -28,9 +28,7 @@ class DataStoreOperationsImpl(context: Context) : DataStoreOperationsAbs {
 
     override suspend fun saveOnBoardingState(state: Boolean) {
         dataStore.edit { preferences ->
-
             preferences[PreferencesKey.onBoardingKey] = state
-
         }
     }
 

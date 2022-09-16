@@ -1,4 +1,4 @@
-package com.example.astonlolapp.presentation.screens.favourite_heroes
+package com.example.astonlolapp.presentation.screens.favourite_heroes.compose
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import com.example.astonlolapp.domain.model.Hero
-import com.example.astonlolapp.presentation.screens.favourite_heroes.compose.ListContent
+import com.example.astonlolapp.presentation.screens.favourite_heroes.FavouriteHeroesViewModel
 import com.example.astonlolapp.ui.statusBarColor
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 

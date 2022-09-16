@@ -5,17 +5,12 @@ import com.example.astonlolapp.data.repository.DataStoreOperationsImpl
 import com.example.astonlolapp.data.repository.Repository
 import com.example.astonlolapp.domain.repository.DataStoreOperationsAbs
 import com.example.astonlolapp.domain.use_cases.UseCases
-import com.example.astonlolapp.domain.use_cases.comisc.get_comics.GetComicsFromApiUseCase
-import com.example.astonlolapp.domain.use_cases.comisc.get_comics.GetComicsUseCase
-import com.example.astonlolapp.domain.use_cases.comisc.get_selected_comics.GetSelectedComicsUseCase
-import com.example.astonlolapp.domain.use_cases.favorite_heroes.add_favourite_hero.AddFavouriteHeroUseCase
-import com.example.astonlolapp.domain.use_cases.favorite_heroes.delete_all_favourite_heroes.DeleteAllFavouriteHeroesUseCase
-import com.example.astonlolapp.domain.use_cases.favorite_heroes.delete_favourite_hero.DeleteFavouriteHeroUseCase
-import com.example.astonlolapp.domain.use_cases.favorite_heroes.get_all_favourite_heroes.GetAllFavouriteHeroesUseCase
+import com.example.astonlolapp.domain.use_cases.comics.get_comics.GetComicsFromApiUseCase
+import com.example.astonlolapp.domain.use_cases.comics.get_comics.GetComicsFromCacheUseCase
+import com.example.astonlolapp.domain.use_cases.comics.get_selected_comics.GetSelectedComicsUseCase
 import com.example.astonlolapp.domain.use_cases.heroes.add_hero_as_favourite.AddHeroAsFavouriteUseCase
 import com.example.astonlolapp.domain.use_cases.heroes.get_all_heroes.GetAllHeroesUseCase
 import com.example.astonlolapp.domain.use_cases.heroes.get_selected_hero.GetSelectedHeroUseCase
-import com.example.astonlolapp.domain.use_cases.heroes.search_heroes.SearchHeroesUseCase
 import com.example.astonlolapp.domain.use_cases.onboarding.read_onboarding.ReadOnboardingUseCase
 import com.example.astonlolapp.domain.use_cases.onboarding.save_onboarding.SaveOnboardingStateUseCase
 import dagger.Module
@@ -41,17 +36,12 @@ object RepositoryModule {
     fun provideUseCases(repository: Repository): UseCases {
         return UseCases(
             getAllHeroesUseCase = GetAllHeroesUseCase(repository = repository),
-            searchHeroes = SearchHeroesUseCase(repository = repository),
             getSelectedHeroUseCase = GetSelectedHeroUseCase(repository = repository),
             saveOnboardingStateUseCase = SaveOnboardingStateUseCase(repository = repository),
             readOnboardingUseCase = ReadOnboardingUseCase(repository = repository),
-            getComicsUseCase = GetComicsUseCase(repository = repository),
+            getComicsFromCacheUseCase = GetComicsFromCacheUseCase(repository = repository),
             getSelectedComicsUseCase = GetSelectedComicsUseCase(repository = repository),
             getComicsFromApiUseCase = GetComicsFromApiUseCase(repository = repository),
-            addFavouriteHeroes = AddFavouriteHeroUseCase(repository = repository),
-            deleteAllFavouriteHeroes = DeleteAllFavouriteHeroesUseCase(repository = repository),
-            getAllFavouriteHeroesUseCase = GetAllFavouriteHeroesUseCase(repository = repository),
-            deleteFavouriteHeroUseCase = DeleteFavouriteHeroUseCase(repository = repository),
             addHeroAsFavouriteUseCase = AddHeroAsFavouriteUseCase(repository = repository)
         )
     }

@@ -12,8 +12,6 @@ import com.example.astonlolapp.domain.model.HeroRemoteKeys
 import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 @OptIn(ExperimentalPagingApi::class)
@@ -31,11 +29,9 @@ class HeroRemoteMediator(
         val lastUpdate = remoteKeyDao.getRemoteKeys(1)?.lastUpdated ?: 0L
         val timePassed = (currentTime - lastUpdate) / 1000 / 60
         return if (timePassed <= maxTimeout) {
-            Timber.d("Skip Initial Refresh")
             InitializeAction.SKIP_INITIAL_REFRESH
 
         } else {
-            Timber.d("Initial Refresh")
             InitializeAction.LAUNCH_INITIAL_REFRESH
         }
     }
@@ -49,13 +45,11 @@ class HeroRemoteMediator(
 
             val page = when (loadType) {
                 LoadType.REFRESH -> {
-                        Timber.d("REFRESH")
                     val remoteKeys = getRemoteKeysClosestToCurrentPosition(state)
                     remoteKeys?.nextPage?.minus(1) ?: 1
 
                 }
                 LoadType.PREPEND -> {
-                    Timber.d("PREPEND")
                     val remoteKeys = getRemoteKeysForFirstItem(state)
                     val prevPage = remoteKeys?.prevPage
                         ?: return MediatorResult.Success(
@@ -66,19 +60,16 @@ class HeroRemoteMediator(
 
                 }
                 LoadType.APPEND -> {
-                    Timber.d("APPEND")
                     val remoteKey = getRemoteKeyForLastItem(state)
                     val nextPage = remoteKey?.nextPage ?: return MediatorResult.Success(
                         endOfPaginationReached = remoteKey != null
                     )
                     nextPage
-
                 }
             }
 
             val response = heroApi.getAllHeroes(page = page)
             if (response.heroes.isNotEmpty()) {
-                Timber.tag("RemoteMediator").d("heroes are not empty")
                 heroDatabase.withTransaction {
                     if (loadType == LoadType.REFRESH) {
                         heroDao.deleteAllHeroes()
@@ -148,9 +139,4 @@ class HeroRemoteMediator(
         }
     }
 
-    private fun parseMillis(time: Long): String {
-        val date = Date(time)
-        val format = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.ROOT)
-        return format.format(date)
-    }
 }

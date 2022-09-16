@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -29,7 +30,6 @@ import com.example.astonlolapp.util.Constants.BASE_URL
 import com.example.astonlolapp.util.Constants.COMICS_PAGE_COUNT
 import com.example.astonlolapp.util.Constants.LAST_ON_COMICS_PAGE
 import com.google.accompanist.pager.*
-import timber.log.Timber
 
 
 @ExperimentalAnimationApi
@@ -77,7 +77,6 @@ fun ComicsPageScreen(
             navController.navigate(R.id.fragmentComics)
         }
     }
-    Timber.d("PAGE STATE ${pagerState.currentPage}")
 }
 
 
@@ -100,7 +99,7 @@ fun PagerScreen(comicsPicture: String?) {
                 .error(R.drawable.ic_error_placeholder)
                 .build(),
             contentScale = ContentScale.scaleImage(LocalContext.current),
-            contentDescription = "Comics image"
+            contentDescription = stringResource(R.string.comics_image)
         )
     }
 }
@@ -131,7 +130,7 @@ fun FinishButton(
                     contentColor = Color.White
                 )
             ) {
-                Text(text = "Finish")
+                Text(text = stringResource(R.string.Finish))
             }
         }
     }
