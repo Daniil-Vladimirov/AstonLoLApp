@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.astonlolapp.databinding.FragmentComicsBinding
 import com.example.astonlolapp.util.simpleScan
@@ -18,7 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ComicsFragment :
@@ -66,8 +66,16 @@ class ComicsFragment :
 
 
     private fun setupRecyclerView(comicsAdapter: ComicsPagingAdapter) {
-        binding.comicsRecyclerView.adapter = comicsAdapter
-        binding.comicsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        with(binding.comicsRecyclerView) {
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(
+                DividerItemDecoration(
+                    context,
+                    LinearLayoutManager.VERTICAL
+                )
+            )
+           adapter = comicsAdapter
+        }
     }
 
     private fun loadDataFromCache() {

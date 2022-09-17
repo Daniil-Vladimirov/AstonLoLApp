@@ -7,6 +7,7 @@ import javax.inject.Inject
 class AddHeroAsFavouriteUseCase @Inject constructor(private val repository: Repository) {
 
     suspend operator fun invoke(hero: Hero) {
-        repository.addHeroAsFavourite(hero = hero.copy(isFavourite = hero.isFavourite != true))
+        repository.addHeroAsFavourite(
+            hero = hero.copy(isFavourite = hero.isFavourite != true))
     }
 }

@@ -20,4 +20,6 @@
     <string name="comics">Comics</string>
     <string name="comics_image">Comics image</string>
     <string name="Finish">Finish</string>
+    <string name="something_went_wrong">Something went wrong :(</string>
+    <string name="retry">Retry</string>
 </resources>

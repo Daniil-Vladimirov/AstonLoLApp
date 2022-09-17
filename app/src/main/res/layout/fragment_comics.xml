@@ -28,9 +28,9 @@
         android:id="@+id/comics_progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.316" />
@@ -39,28 +39,30 @@
         android:id="@+id/comics_errorMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Error"
+        android:text="@string/something_went_wrong"
+        android:textColor="@color/white"
+        android:textSize="24sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comics_progressBar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/comics_retry_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Retry"
+        android:backgroundTint="@color/darkGray"
+        android:text="@string/retry"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comics_errorMsg" />
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/comics_errorMsg"
+        app:layout_constraintVertical_bias="0.20" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

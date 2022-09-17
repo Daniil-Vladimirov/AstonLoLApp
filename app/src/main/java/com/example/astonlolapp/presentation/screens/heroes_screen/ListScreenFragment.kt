@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astonlolapp.databinding.FragmentListScreenBinding
@@ -22,7 +23,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @AndroidEntryPoint
@@ -71,8 +71,17 @@ class ListScreenFragment :
 
     private fun setupViews(binding: FragmentListScreenBinding) {
         recyclerView = binding.recyclerview
-        binding.recyclerview.layoutManager = LinearLayoutManager(context)
-        binding.recyclerview.adapter = heroAdapter
+        with(binding.recyclerview) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = heroAdapter
+            addItemDecoration(
+                DividerItemDecoration(
+                    context,
+                    LinearLayoutManager.VERTICAL
+                )
+            )
+
+        }
 
 
     }

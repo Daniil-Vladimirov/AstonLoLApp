@@ -11,7 +11,8 @@
         tools:layout="@layout/fragment_list_screen" >
         <action
             android:id="@+id/action_listScreenFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/item_animation" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -30,7 +31,8 @@
         tools:layout="@layout/fragment_comics" >
         <action
             android:id="@+id/action_fragmentComics_to_composeUIFragment"
-            app:destination="@id/comics_detail_fragment" />
+            app:destination="@id/comics_detail_fragment"
+            app:enterAnim="@anim/item_animation" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFavouriteHeroes"
