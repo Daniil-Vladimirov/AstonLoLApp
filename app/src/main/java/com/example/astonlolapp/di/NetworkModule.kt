@@ -11,6 +11,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -56,11 +57,13 @@ object NetworkModule {
     @Singleton
     fun provideRemoteDatasource(
         heroApi: HeroApi,
-        heroDatabase: HeroDatabase
+        heroDatabase: HeroDatabase,
+       @ApplicationScope iODispatcher: CoroutineDispatcher
     ): RemoteDatasourceAbs {
         return RemoteDataSourceImpl(
             heroApi = heroApi,
-            heroDatabase =heroDatabase
+            heroDatabase =heroDatabase,
+            iODispatcher = iODispatcher
         )
     }
 }

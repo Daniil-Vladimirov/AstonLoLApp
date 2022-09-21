@@ -3,25 +3,29 @@ package com.example.astonlolapp.presentation.screens.favourite_heroes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.filter
+import com.example.astonlolapp.di.ApplicationScope
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.use_cases.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavouriteHeroesViewModel @Inject constructor(val useCases: UseCases) : ViewModel() {
+class FavouriteHeroesViewModel @Inject constructor(
+    val useCases: UseCases,
+    @ApplicationScope val iODispatcher: CoroutineDispatcher
+) : ViewModel() {
 
-    val getAllFavouriteHeroes = useCases.getAllHeroesUseCase().map {pagingDataHeroes->
+    val getAllFavouriteHeroes = useCases.getAllHeroesUseCase().map { pagingDataHeroes ->
         pagingDataHeroes.filter { hero ->
             hero.isFavourite == true
         }
     }
 
     fun deleteFavouriteHero(hero: Hero) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(iODispatcher) {
             useCases.addHeroAsFavouriteUseCase(hero)
         }
     }

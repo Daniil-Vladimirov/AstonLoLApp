@@ -5,24 +5,25 @@ import androidx.paging.PagingState
 import com.example.astonlolapp.data.local.HeroDatabase
 import com.example.astonlolapp.data.remote.HeroApi
 import com.example.astonlolapp.domain.model.Comics
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 
-class ComicsSource(
+class ComicsSource (
     private val heroApi: HeroApi,
-     heroDatabase: HeroDatabase,
+    heroDatabase: HeroDatabase,
+    val iODispatcher: CoroutineDispatcher
 ) : PagingSource<Int, Comics>() {
 
     private val comicsDao = heroDatabase.comicsDao()
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Comics> {
+    override suspend fun load(params: LoadParams<Int>): PagingSource.LoadResult<Int, Comics> {
 
         return try {
             val apiResponse = heroApi.getComics()
             val comics = apiResponse.comics
-               withContext(Dispatchers.IO) {
-                   comicsDao.addComics(comics)
-               }
+            withContext(iODispatcher) {
+                comicsDao.addComics(comics)
+            }
 
 
             if (comics.isNotEmpty()) {
