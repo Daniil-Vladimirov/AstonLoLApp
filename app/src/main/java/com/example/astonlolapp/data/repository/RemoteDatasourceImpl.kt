@@ -12,7 +12,6 @@ import com.example.astonlolapp.domain.model.Comics
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.domain.repository.RemoteDatasourceAbs
 import com.example.astonlolapp.util.Constants.ITEMS_PAGE_SIZE
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 
 @ExperimentalPagingApi
@@ -20,7 +19,6 @@ class RemoteDataSourceImpl
     (
     private val heroApi: HeroApi,
     private val heroDatabase: HeroDatabase,
-    val iODispatcher: CoroutineDispatcher
 ) : RemoteDatasourceAbs {
 
     private val heroDao = heroDatabase.heroDao()
@@ -44,7 +42,7 @@ class RemoteDataSourceImpl
             pageSize = ITEMS_PAGE_SIZE, enablePlaceholders = false
         ), pagingSourceFactory = {
             ComicsSource(
-                heroApi = heroApi, heroDatabase = heroDatabase, iODispatcher
+                heroApi = heroApi, heroDatabase = heroDatabase
             )
         }).flow
 

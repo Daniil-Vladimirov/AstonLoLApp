@@ -58,12 +58,10 @@ object NetworkModule {
     fun provideRemoteDatasource(
         heroApi: HeroApi,
         heroDatabase: HeroDatabase,
-       @ApplicationScope iODispatcher: CoroutineDispatcher
     ): RemoteDatasourceAbs {
         return RemoteDataSourceImpl(
             heroApi = heroApi,
-            heroDatabase =heroDatabase,
-            iODispatcher = iODispatcher
+            heroDatabase =heroDatabase
         )
     }
 }

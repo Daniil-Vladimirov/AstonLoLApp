@@ -5,14 +5,11 @@ import androidx.paging.PagingState
 import com.example.astonlolapp.data.local.HeroDatabase
 import com.example.astonlolapp.data.remote.HeroApi
 import com.example.astonlolapp.domain.model.Comics
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
 
 
 class ComicsSource (
     private val heroApi: HeroApi,
     heroDatabase: HeroDatabase,
-    val iODispatcher: CoroutineDispatcher
 ) : PagingSource<Int, Comics>() {
 
     private val comicsDao = heroDatabase.comicsDao()
@@ -21,10 +18,8 @@ class ComicsSource (
         return try {
             val apiResponse = heroApi.getComics()
             val comics = apiResponse.comics
-            withContext(iODispatcher) {
-                comicsDao.addComics(comics)
-            }
 
+            comicsDao.addComics(comics)
 
             if (comics.isNotEmpty()) {
                 LoadResult.Page(
