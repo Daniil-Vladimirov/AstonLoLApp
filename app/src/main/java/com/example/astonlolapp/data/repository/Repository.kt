@@ -45,7 +45,7 @@ class Repository @Inject constructor(
         return dataStoreOperationsAbs.readOnBoardingState()
     }
 
-    fun getComics(): Flow<PagingData<Comics>> {
+    fun getComicsFromCache(): Flow<PagingData<Comics>> {
         return localDataSourceAbs.getComics()
     }
 

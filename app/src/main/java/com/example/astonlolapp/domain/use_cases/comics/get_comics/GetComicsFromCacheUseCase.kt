@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class GetComicsFromCacheUseCase(private val repository: Repository) {
 
    operator fun invoke(): Flow<PagingData<Comics>> {
-        return repository.getComics()
+        return repository.getComicsFromCache()
     }
 
 }

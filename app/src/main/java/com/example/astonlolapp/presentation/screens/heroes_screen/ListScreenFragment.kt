@@ -15,6 +15,7 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 import com.example.astonlolapp.databinding.FragmentListScreenBinding
 import com.example.astonlolapp.domain.model.Hero
 import com.example.astonlolapp.util.simpleScan
@@ -55,7 +56,7 @@ class ListScreenFragment :
         setupSwipeToRefresh()
 
         binding.retryButton.setOnClickListener {
-            fetchHeroes()
+         fetchHeroes()
         }
 
 

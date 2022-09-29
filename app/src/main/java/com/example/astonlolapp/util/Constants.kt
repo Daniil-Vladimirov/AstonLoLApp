@@ -17,4 +17,13 @@ object Constants {
 
     const val COMICS_PAGE_COUNT = 9
     const val LAST_ON_COMICS_PAGE = 8
+
+
+    //Notification
+    const val VERBOSE_NOTIFICATION_CHANNEL_NAME = "Verbose WorkManager Notifications"
+    const val VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION =
+        "Shows notifications whenever work starts"
+    const val CHANNEL_ID = "VERBOSE_NOTIFICATION"
+    const val NOTIFICATION_ID = 1
+    const val NOTIFICATION_TITLE= "WorkRequest Starting"
 }

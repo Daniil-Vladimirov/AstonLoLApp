@@ -8,6 +8,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import com.example.astonlolapp.data.work_manager.HeroWorker
 import com.example.astonlolapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,12 +21,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        val workManager = WorkManager.getInstance(application)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
@@ -32,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigation = binding.bottomNavigationView
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if(destination.id == R.id.comics_detail_fragment) {
+            if (destination.id == R.id.comics_detail_fragment) {
 
                 bottomNavigation.visibility = View.GONE
             } else {
@@ -43,6 +46,9 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.listScreenFragment, R.id.fragmentFavouriteHeroes, R.id.fragmentComics)
+        )
+        workManager.enqueue(
+            OneTimeWorkRequestBuilder<HeroWorker>().build()
         )
 
     }
