@@ -6,6 +6,7 @@ import com.example.astonlolapp.domain.use_cases.comics.get_selected_comics.GetSe
 import com.example.astonlolapp.domain.use_cases.heroes.add_hero_as_favourite.AddHeroAsFavouriteUseCase
 import com.example.astonlolapp.domain.use_cases.heroes.get_all_heroes.GetAllHeroesUseCase
 import com.example.astonlolapp.domain.use_cases.heroes.get_selected_hero.GetSelectedHeroUseCase
+import com.example.astonlolapp.domain.use_cases.heroes.update_heroes.UpdateHeroesUseCase
 import com.example.astonlolapp.domain.use_cases.onboarding.read_onboarding.ReadOnboardingUseCase
 import com.example.astonlolapp.domain.use_cases.onboarding.save_onboarding.SaveOnboardingStateUseCase
 
@@ -17,5 +18,6 @@ data class UseCases(
     val getComicsFromCacheUseCase: GetComicsFromCacheUseCase,
     val getSelectedComicsUseCase: GetSelectedComicsUseCase,
     val getComicsFromApiUseCase: GetComicsFromApiUseCase,
-    val addHeroAsFavouriteUseCase: AddHeroAsFavouriteUseCase
+    val addHeroAsFavouriteUseCase: AddHeroAsFavouriteUseCase,
+    val updateHeroesUseCase: UpdateHeroesUseCase
 )

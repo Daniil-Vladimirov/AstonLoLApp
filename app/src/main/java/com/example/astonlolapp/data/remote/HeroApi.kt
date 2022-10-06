@@ -8,7 +8,8 @@ interface HeroApi {
 
     @GET("/lol/heroes")
     suspend fun getAllHeroes(
-        @Query("page") page: Int = 1
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 3
     ): ApiResponse
 
     @GET("lol/comics")

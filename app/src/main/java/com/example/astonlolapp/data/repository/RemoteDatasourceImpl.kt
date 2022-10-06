@@ -48,4 +48,18 @@ class RemoteDataSourceImpl
 
     }
 
+    override suspend fun updateHeroes(): Boolean {
+        return try {
+            val apiResponse = heroApi.getAllHeroes(1, 10)
+            val heroes = apiResponse.heroes
+            if (heroes.isNotEmpty()) {
+                heroDao.addHeroes(heroes)
+            }
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
 }

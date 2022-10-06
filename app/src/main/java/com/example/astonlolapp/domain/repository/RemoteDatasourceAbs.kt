@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface RemoteDatasourceAbs {
     fun getAllHeroes(): Flow<PagingData<Hero>>
     fun getComicsFromApi(): Flow<PagingData<Comics>>
+    suspend fun updateHeroes(): Boolean
 }

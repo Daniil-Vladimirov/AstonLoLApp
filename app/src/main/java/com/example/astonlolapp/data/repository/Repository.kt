@@ -20,8 +20,7 @@ class Repository @Inject constructor(
 ) {
 
 
-
-    suspend fun getSelectedHero(heroId: Int): Hero = withContext(iODispatcher){
+    suspend fun getSelectedHero(heroId: Int): Hero = withContext(iODispatcher) {
         return@withContext localDataSourceAbs.getSelectedHero(heroId = heroId)
     }
 
@@ -29,7 +28,7 @@ class Repository @Inject constructor(
         return@withContext localDataSourceAbs.getSelectedComics(comicsId = comicsId)
     }
 
-    suspend fun saveOnBoardingState(state: Boolean)= withContext(iODispatcher)  {
+    suspend fun saveOnBoardingState(state: Boolean) = withContext(iODispatcher) {
         dataStoreOperationsAbs.saveOnBoardingState(state = state)
     }
 
@@ -53,6 +52,9 @@ class Repository @Inject constructor(
         return remoteDataSourceAbs.getComicsFromApi()
     }
 
+    suspend fun updateHeroes(): Boolean = withContext(iODispatcher) {
+        remoteDataSourceAbs.updateHeroes()
+    }
 
 
 }

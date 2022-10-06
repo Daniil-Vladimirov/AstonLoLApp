@@ -16,7 +16,7 @@ interface HeroDao {
     @Query("SELECT * FROM hero_database_table WHERE id=:heroId")
     fun getSelectedHero(heroId: Int): Hero
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addHeroes(heroes: List<Hero>)
 
     @Query("DELETE FROM hero_database_table")
