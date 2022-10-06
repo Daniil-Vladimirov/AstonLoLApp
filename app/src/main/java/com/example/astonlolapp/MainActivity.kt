@@ -8,11 +8,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.example.astonlolapp.data.work_manager.HeroWorker
 import com.example.astonlolapp.databinding.ActivityMainBinding
+import com.example.astonlolapp.util.Constants.WORK_MANAGER_REPEAT_INTERVAL
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val bottomNavigation = binding.bottomNavigationView
+        setUpWorkManager(workManager = workManager)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.comics_detail_fragment) {
@@ -47,14 +49,35 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.listScreenFragment, R.id.fragmentFavouriteHeroes, R.id.fragmentComics)
         )
-        workManager.enqueue(
-            OneTimeWorkRequestBuilder<HeroWorker>().build()
-        )
+
 
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)
+    }
+
+    private fun setUpWorkManager(workManager: WorkManager) {
+        val constraints = Constraints.Builder()
+            .setRequiresCharging(true)
+            .setRequiredNetworkType(NetworkType.UNMETERED)
+            .build()
+        val periodicWork =
+            PeriodicWorkRequest
+                .Builder(HeroWorker::class.java, WORK_MANAGER_REPEAT_INTERVAL, TimeUnit.HOURS)
+                .setConstraints(constraints)
+                .setInitialDelay(WORK_MANAGER_REPEAT_INTERVAL, TimeUnit.HOURS)
+                .setBackoffCriteria(
+                    BackoffPolicy.LINEAR,
+                    PeriodicWorkRequest.MIN_BACKOFF_MILLIS,
+                    TimeUnit.MILLISECONDS
+                )
+                .build()
+        workManager.enqueueUniquePeriodicWork(
+            "updateHeroes",
+            ExistingPeriodicWorkPolicy.REPLACE,
+            periodicWork
+        )
     }
 }
 

@@ -26,4 +26,6 @@ object Constants {
     const val CHANNEL_ID = "VERBOSE_NOTIFICATION"
     const val NOTIFICATION_ID = 1
     const val NOTIFICATION_TITLE= "WorkRequest Starting"
+
+    const val WORK_MANAGER_REPEAT_INTERVAL = 24L
 }

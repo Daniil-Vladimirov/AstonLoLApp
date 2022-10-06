@@ -18,15 +18,15 @@ class HeroWorker @AssistedInject constructor(
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
-        makeStatusNotification("Fetching heroes", applicationContext)
 
         return try {
             val response = useCases.updateHeroesUseCase()
             Timber.d("$response")
             if (response) {
+                makeStatusNotification("Fetching heroes", applicationContext)
                 Result.success()
             } else {
-                Result.failure()
+                Result.retry()
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -34,9 +34,5 @@ class HeroWorker @AssistedInject constructor(
         }
     }
 
-
-    companion object {
-        const val WORK_RESULT = "work_result"
-    }
 
 }
