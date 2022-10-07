@@ -3,18 +3,15 @@ package com.example.astonlolapp.presentation.screens.login
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 
 @Composable
 fun LoginScreen(
-    navController: NavHostController,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: LoginViewModel
 ) {
 
     val messageBarState by viewModel.messageBarState
     val signedInState by viewModel.signedInState
-    val apiResponse by viewModel.apiResponse
+    //val apiResponse by viewModel.apiResponse
 
 
     Scaffold(

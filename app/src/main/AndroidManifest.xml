@@ -51,6 +51,21 @@
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".presentation.screens.login.LoginActivity"
+            android:exported="true"
+            android:launchMode="singleInstance"
+
+            >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.MAIN" />
+            </intent-filter>
+
+        </activity>
+
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"

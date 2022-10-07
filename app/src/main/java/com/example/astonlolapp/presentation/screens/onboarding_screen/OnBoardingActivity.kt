@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.astonlolapp.MainActivity
 import com.example.astonlolapp.R
 import com.example.astonlolapp.databinding.OnboardingViewpagerBinding
+import com.example.astonlolapp.presentation.screens.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +43,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     fun onBoardingClicked(view: View) {
         onBoardingViewModel.saveOnBoardingState(state = true)
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
 
