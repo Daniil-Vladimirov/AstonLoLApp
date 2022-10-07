@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.astonlolapp"
@@ -94,6 +94,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.4.1")
 
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
@@ -143,14 +144,20 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.activity:activity-compose:1.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.0'
+    implementation("androidx.navigation:navigation-compose:2.6.0-alpha02")
     implementation("io.coil-kt:coil-compose:2.2.0")
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
 
     // Gson
     implementation 'com.google.code.gson:gson:2.9.0'
 
     // WorkManager with Coroutines
     implementation "androidx.work:work-runtime-ktx:$work_manager_version"
+
+    // Google Auth
+    implementation 'com.google.android.gms:play-services-auth:20.3.0'
 
 
 }

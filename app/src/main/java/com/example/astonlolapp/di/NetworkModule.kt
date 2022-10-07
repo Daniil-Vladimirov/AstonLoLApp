@@ -11,12 +11,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import okhttp3.JavaNetCookieJar
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import java.net.CookieManager
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -27,10 +28,17 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideClient(): OkHttpClient {
+    fun provideCookieManager(): CookieManager {
+        return CookieManager()
+    }
+
+    @Provides
+    @Singleton
+    fun provideClient(cookieManager: CookieManager): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(15, TimeUnit.SECONDS)
             .callTimeout(15, TimeUnit.SECONDS)
+            .cookieJar(JavaNetCookieJar(cookieHandler = cookieManager))
             .build()
     }
 
@@ -61,7 +69,7 @@ object NetworkModule {
     ): RemoteDatasourceAbs {
         return RemoteDataSourceImpl(
             heroApi = heroApi,
-            heroDatabase =heroDatabase
+            heroDatabase = heroDatabase
         )
     }
 }
