@@ -14,6 +14,8 @@ import com.example.astonlolapp.domain.use_cases.heroes.get_selected_hero.GetSele
 import com.example.astonlolapp.domain.use_cases.heroes.update_heroes.UpdateHeroesUseCase
 import com.example.astonlolapp.domain.use_cases.onboarding.read_onboarding.ReadOnboardingUseCase
 import com.example.astonlolapp.domain.use_cases.onboarding.save_onboarding.SaveOnboardingStateUseCase
+import com.example.astonlolapp.domain.use_cases.signed_in.read_signedin.ReadSignedInUseCase
+import com.example.astonlolapp.domain.use_cases.signed_in.save_signedin.SaveSignedInStateUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,7 +46,9 @@ object RepositoryModule {
             getSelectedComicsUseCase = GetSelectedComicsUseCase(repository = repository),
             getComicsFromApiUseCase = GetComicsFromApiUseCase(repository = repository),
             addHeroAsFavouriteUseCase = AddHeroAsFavouriteUseCase(repository = repository),
-            updateHeroesUseCase = UpdateHeroesUseCase(repository = repository)
+            updateHeroesUseCase = UpdateHeroesUseCase(repository = repository),
+            saveSignedInStateUseCase = SaveSignedInStateUseCase(repository = repository),
+            readSignedInUseCase = ReadSignedInUseCase(repository = repository)
         )
     }
 

@@ -19,17 +19,9 @@ class Repository @Inject constructor(
     @ApplicationScope private val iODispatcher: CoroutineDispatcher
 ) {
 
-
+    //Operations with heroes
     suspend fun getSelectedHero(heroId: Int): Hero = withContext(iODispatcher) {
         return@withContext localDataSourceAbs.getSelectedHero(heroId = heroId)
-    }
-
-    suspend fun getSelectedComics(comicsId: Int): Comics = withContext(iODispatcher) {
-        return@withContext localDataSourceAbs.getSelectedComics(comicsId = comicsId)
-    }
-
-    suspend fun saveOnBoardingState(state: Boolean) = withContext(iODispatcher) {
-        dataStoreOperationsAbs.saveOnBoardingState(state = state)
     }
 
     suspend fun addHeroAsFavourite(hero: Hero) = withContext(iODispatcher) {
@@ -40,8 +32,13 @@ class Repository @Inject constructor(
         return remoteDataSourceAbs.getAllHeroes()
     }
 
-    fun readBoardingState(): Flow<Boolean> {
-        return dataStoreOperationsAbs.readOnBoardingState()
+    suspend fun updateHeroes(): Boolean = withContext(iODispatcher) {
+        remoteDataSourceAbs.updateHeroes()
+    }
+
+    //Operations with comics
+    suspend fun getSelectedComics(comicsId: Int): Comics = withContext(iODispatcher) {
+        return@withContext localDataSourceAbs.getSelectedComics(comicsId = comicsId)
     }
 
     fun getComicsFromCache(): Flow<PagingData<Comics>> {
@@ -52,9 +49,21 @@ class Repository @Inject constructor(
         return remoteDataSourceAbs.getComicsFromApi()
     }
 
-    suspend fun updateHeroes(): Boolean = withContext(iODispatcher) {
-        remoteDataSourceAbs.updateHeroes()
+    //Operations with dataStore
+    suspend fun saveOnBoardingState(state: Boolean) = withContext(iODispatcher) {
+        dataStoreOperationsAbs.saveOnBoardingState(state = state)
     }
 
+    fun readBoardingState(): Flow<Boolean> {
+        return dataStoreOperationsAbs.readOnBoardingState()
+    }
+
+    suspend fun saveSignedInState(signedIn: Boolean) = withContext(iODispatcher) {
+        dataStoreOperationsAbs.saveSignedInState(signedIn = signedIn)
+    }
+
+    fun readSignedInState(): Flow<Boolean> {
+        return dataStoreOperationsAbs.readSignedInState()
+    }
 
 }
