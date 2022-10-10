@@ -29,4 +29,6 @@ object Constants {
     const val NOTIFICATION_TITLE= "WorkRequest Starting"
 
     const val WORK_MANAGER_REPEAT_INTERVAL = 24L
+
+    const val SERVER_CLIENT_ID = "918660918687-csdb0i7um4pq5o5q4eg6s5r8jf12e99f.apps.googleusercontent.com"
 }
