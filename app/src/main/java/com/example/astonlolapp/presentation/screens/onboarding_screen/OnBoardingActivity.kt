@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.astonlolapp.R
 import com.example.astonlolapp.databinding.OnboardingViewpagerBinding
-import com.example.astonlolapp.presentation.screens.login.LoginActivity
+import com.example.astonlolapp.presentation.screens.login_screen.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

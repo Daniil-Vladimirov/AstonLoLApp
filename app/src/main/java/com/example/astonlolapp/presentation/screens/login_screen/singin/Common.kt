@@ -1,4 +1,4 @@
-package com.example.astonlolapp.presentation.screens.login.singin
+package com.example.astonlolapp.presentation.screens.login_screen.singin
 
 import android.app.Activity
 import androidx.activity.compose.ManagedActivityResultLauncher

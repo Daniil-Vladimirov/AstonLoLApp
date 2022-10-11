@@ -1,4 +1,4 @@
-package com.example.astonlolapp.presentation.screens.login
+package com.example.astonlolapp.presentation.screens.login_screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.ContentAlpha

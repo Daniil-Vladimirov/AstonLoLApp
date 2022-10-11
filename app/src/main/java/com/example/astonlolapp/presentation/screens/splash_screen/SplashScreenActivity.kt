@@ -13,15 +13,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.astonlolapp.MainActivity
 import com.example.astonlolapp.R
 import com.example.astonlolapp.databinding.ActivitySplashScreenBinding
-import com.example.astonlolapp.presentation.screens.onboarding_screen.OnBoardingActivity
+import com.example.astonlolapp.domain.model.ScreenState
+import com.example.astonlolapp.domain.model.readStateForActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
@@ -29,7 +28,6 @@ import kotlin.properties.Delegates
 class SplashScreenActivity : AppCompatActivity() {
 
     private val splashViewModel by viewModels<SplashViewModel>()
-    private var onBoardingState by Delegates.notNull<Boolean>()
     private lateinit var binding: ActivitySplashScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,48 +36,36 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
+            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
         val backgroundImage: ImageView = findViewById(R.id.SplashScreenImage)
         val slideAnimation = AnimationUtils.loadAnimation(this, R.anim.top_slide)
         backgroundImage.startAnimation(slideAnimation)
+        readScreenState()
+    }
 
+    private fun readScreenState() {
         lifecycleScope.launch {
-            splashViewModel.onBoardingCompleted.collectLatest {
-                onBoardingState = it
-                delay(1000)
-                startActivityFor(
-                    onBoardingState,
-                    context = this@SplashScreenActivity,
-                )
+            splashViewModel.screenState.collectLatest { screenState ->
+                delay(200)
+                startActivityForLogin(this@SplashScreenActivity, screenState = screenState)
             }
+        }
+    }
+
+    private fun startActivityForLogin(context: Context, screenState: ScreenState) {
+        lifecycleScope.launch {
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(context, screenState.readStateForActivity())
+                startActivity(context, intent, null)
+                val activity = context as SplashScreenActivity
+                activity.finish()
+            }, 1000)
         }
     }
 }
 
-fun startActivityFor(onBoardingState: Boolean, context: Context) {
-
-    if (onBoardingState) {
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(context, MainActivity::class.java)
-            startActivity(context, intent, null)
-            val activity = context as SplashScreenActivity
-            activity.finish()
-        }, 1000)
-    } else {
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(
-                context,
-                OnBoardingActivity::class.java
-            ).addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-            startActivity(context, intent, null)
-            val activity = context as SplashScreenActivity
-            activity.finish()
-        }, 1000)
-    }
-}
 
 
 

@@ -1,4 +1,4 @@
-package com.example.astonlolapp.presentation.screens.login
+package com.example.astonlolapp.presentation.screens.login_screen
 
 import android.os.Bundle
 import androidx.activity.viewModels

@@ -48,6 +48,6 @@
     </fragment>
     <activity
         android:id="@+id/hilt_LoginActivity"
-        android:name="com.example.astonlolapp.presentation.screens.login.Hilt_LoginActivity"
+        android:name="com.example.astonlolapp.presentation.screens.login_screen.Hilt_LoginActivity"
         android:label="Hilt_LoginActivity" />
 </navigation>
