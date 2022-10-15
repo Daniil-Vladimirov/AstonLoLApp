@@ -14,7 +14,7 @@ object Constants {
 
     const val HERO_PREFERENCES_NAME = "hero_preferences"
     const val ON_BOARDING_PREFERENCES_KEY = "on_boarding_completed"
-    const val SIGNED_IN_PREFERENCES_KEY = "on_boarding_completed"
+    const val SIGNED_IN_PREFERENCES_KEY = "on_sing_in_completed"
 
     const val COMICS_PAGE_COUNT = 9
     const val LAST_ON_COMICS_PAGE = 8

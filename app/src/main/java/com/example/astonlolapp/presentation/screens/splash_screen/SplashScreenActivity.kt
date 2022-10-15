@@ -21,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
@@ -48,22 +49,22 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun readScreenState() {
         lifecycleScope.launch {
             splashViewModel.screenState.collectLatest { screenState ->
-                delay(200)
+                delay(1000)
+                Timber.d("${screenState.onBoardingState}, ${screenState.loginState}")
                 startActivityForLogin(this@SplashScreenActivity, screenState = screenState)
             }
         }
     }
 
     private fun startActivityForLogin(context: Context, screenState: ScreenState) {
-        lifecycleScope.launch {
-            Handler(Looper.getMainLooper()).postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(context, screenState.readStateForActivity())
                 startActivity(context, intent, null)
                 val activity = context as SplashScreenActivity
                 activity.finish()
             }, 1000)
         }
-    }
+
 }
 
 

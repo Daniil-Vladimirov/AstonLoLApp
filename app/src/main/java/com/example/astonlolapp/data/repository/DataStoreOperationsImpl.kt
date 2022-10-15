@@ -26,6 +26,7 @@ class DataStoreOperationsImpl(context: Context) : DataStoreOperationsAbs {
         val signedInKey = booleanPreferencesKey(name = SIGNED_IN_PREFERENCES_KEY)
     }
 
+
     private val dataStore = context.dataStore
 
     override suspend fun saveOnBoardingState(state: Boolean) {
@@ -46,9 +47,7 @@ class DataStoreOperationsImpl(context: Context) : DataStoreOperationsAbs {
                 }
             }
             .map { preferences ->
-                Timber.d("$preferences")
                 val onBoardingState = preferences[PreferencesKey.onBoardingKey] ?: false
-                Timber.d("$onBoardingState")
                 onBoardingState
             }
     }
@@ -70,9 +69,7 @@ class DataStoreOperationsImpl(context: Context) : DataStoreOperationsAbs {
                 }
             }
             .map { preferences ->
-                Timber.d("$preferences")
                 val signedInState = preferences[PreferencesKey.signedInKey] ?: false
-                Timber.d("$signedInState")
                 signedInState
             }
     }
