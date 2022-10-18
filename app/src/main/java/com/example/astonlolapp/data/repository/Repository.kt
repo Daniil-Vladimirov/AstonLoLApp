@@ -67,9 +67,10 @@ class Repository @Inject constructor(
 
     //Operations with User
 
-    suspend fun tokenVerification(apiRequest: ApiRequest): ApiResponse {
-        return remoteDataSourceAbs.tokenVerification(apiRequest = apiRequest)
+    suspend fun tokenVerification(apiRequest: ApiRequest): ApiResponse = withContext(iODispatcher) {
+        remoteDataSourceAbs.tokenVerification(apiRequest = apiRequest)
     }
+
 
     suspend fun deleteUser(): ApiResponse {
         return remoteDataSourceAbs.deleteUser()

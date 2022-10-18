@@ -70,7 +70,6 @@ class RemoteDataSourceImpl
                 error = e
             )
         }
-
     }
 
     override suspend fun deleteUser(): ApiResponse {

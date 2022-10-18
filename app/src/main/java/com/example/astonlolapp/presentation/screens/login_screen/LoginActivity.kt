@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
             ComposeView(this).apply {
                 setContent {
                     LoginScreen(
-                        viewModel = loginViewModel
+                        viewModel = loginViewModel,
                     )
                 }
             }
