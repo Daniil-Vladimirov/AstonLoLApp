@@ -2,8 +2,7 @@ package com.example.astonlolapp.data.repository
 
 import androidx.paging.PagingData
 import com.example.astonlolapp.di.ApplicationScope
-import com.example.astonlolapp.domain.model.Comics
-import com.example.astonlolapp.domain.model.Hero
+import com.example.astonlolapp.domain.model.*
 import com.example.astonlolapp.domain.repository.DataStoreOperationsAbs
 import com.example.astonlolapp.domain.repository.LocalDatasourceAbs
 import com.example.astonlolapp.domain.repository.RemoteDatasourceAbs
@@ -64,6 +63,28 @@ class Repository @Inject constructor(
 
     fun readSignedInState(): Flow<Boolean> {
         return dataStoreOperationsAbs.readSignedInState()
+    }
+
+    //Operations with User
+
+    suspend fun tokenVerification(apiRequest: ApiRequest): ApiResponse {
+        return remoteDataSourceAbs.tokenVerification(apiRequest = apiRequest)
+    }
+
+    suspend fun deleteUser(): ApiResponse {
+        return remoteDataSourceAbs.deleteUser()
+    }
+
+    suspend fun updateUserInfo(userInfo: UpdateInfo): ApiResponse {
+        return remoteDataSourceAbs.updateUserInfo(userInfo = userInfo)
+    }
+
+    suspend fun signOut(): ApiResponse {
+        return remoteDataSourceAbs.signOut()
+    }
+
+    suspend fun getUser(): ApiResponse {
+        return remoteDataSourceAbs.getUser()
     }
 
 }

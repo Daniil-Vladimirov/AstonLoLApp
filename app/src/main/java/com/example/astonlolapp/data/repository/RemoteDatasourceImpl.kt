@@ -8,8 +8,7 @@ import com.example.astonlolapp.data.local.HeroDatabase
 import com.example.astonlolapp.data.paging_source.ComicsSource
 import com.example.astonlolapp.data.paging_source.HeroRemoteMediator
 import com.example.astonlolapp.data.remote.HeroApi
-import com.example.astonlolapp.domain.model.Comics
-import com.example.astonlolapp.domain.model.Hero
+import com.example.astonlolapp.domain.model.*
 import com.example.astonlolapp.domain.repository.RemoteDatasourceAbs
 import com.example.astonlolapp.util.Constants.ITEMS_PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
@@ -59,6 +58,62 @@ class RemoteDataSourceImpl
         } catch (e: Exception) {
             e.printStackTrace()
             false
+        }
+    }
+
+    override suspend fun tokenVerification(apiRequest: ApiRequest): ApiResponse {
+        return try {
+            heroApi.tokenVerification(apiRequest = apiRequest)
+        } catch (e: Exception) {
+            ApiResponse(
+                success = false,
+                error = e
+            )
+        }
+
+    }
+
+    override suspend fun deleteUser(): ApiResponse {
+        return try {
+            heroApi.deleteUser()
+        } catch (e: Exception) {
+            ApiResponse(
+                success = false,
+                error = e
+            )
+        }
+    }
+
+    override suspend fun updateUserInfo(userInfo: UpdateInfo): ApiResponse {
+        return try {
+            heroApi.updateUserInfo(userInfoUpdate = userInfo)
+        } catch (e: Exception) {
+            ApiResponse(
+                success = false,
+                error = e
+            )
+        }
+    }
+
+    override suspend fun signOut(): ApiResponse {
+        return try {
+            heroApi.signOut()
+        } catch (e: Exception) {
+            ApiResponse(
+                success = false,
+                error = e
+            )
+        }
+    }
+
+    override suspend fun getUser(): ApiResponse {
+        return try {
+            heroApi.getUser()
+        } catch (e: Exception) {
+            ApiResponse(
+                success = false,
+                error = e
+            )
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.astonlolapp.domain.use_cases.signed_in.read_signedin
+package com.example.astonlolapp.domain.use_cases.signed_in_state.read_signedin
 
 import com.example.astonlolapp.data.repository.Repository
 import kotlinx.coroutines.flow.Flow

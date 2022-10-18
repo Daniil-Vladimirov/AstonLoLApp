@@ -7,10 +7,10 @@ import com.example.astonlolapp.domain.use_cases.heroes.add_hero_as_favourite.Add
 import com.example.astonlolapp.domain.use_cases.heroes.get_all_heroes.GetAllHeroesUseCase
 import com.example.astonlolapp.domain.use_cases.heroes.get_selected_hero.GetSelectedHeroUseCase
 import com.example.astonlolapp.domain.use_cases.heroes.update_heroes.UpdateHeroesUseCase
-import com.example.astonlolapp.domain.use_cases.onboarding.read_onboarding.ReadOnboardingUseCase
-import com.example.astonlolapp.domain.use_cases.onboarding.save_onboarding.SaveOnboardingStateUseCase
-import com.example.astonlolapp.domain.use_cases.signed_in.read_signedin.ReadSignedInUseCase
-import com.example.astonlolapp.domain.use_cases.signed_in.save_signedin.SaveSignedInStateUseCase
+import com.example.astonlolapp.domain.use_cases.onboarding_state.read_onboarding.ReadOnboardingUseCase
+import com.example.astonlolapp.domain.use_cases.onboarding_state.save_onboarding.SaveOnboardingStateUseCase
+import com.example.astonlolapp.domain.use_cases.signed_in_state.read_signedin.ReadSignedInUseCase
+import com.example.astonlolapp.domain.use_cases.signed_in_state.save_signedin.SaveSignedInStateUseCase
 
 data class UseCases(
     val getAllHeroesUseCase: GetAllHeroesUseCase,

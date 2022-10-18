@@ -1,4 +1,4 @@
-package com.example.astonlolapp.domain.use_cases.onboarding.save_onboarding
+package com.example.astonlolapp.domain.use_cases.onboarding_state.save_onboarding
 
 import com.example.astonlolapp.data.repository.Repository
 
