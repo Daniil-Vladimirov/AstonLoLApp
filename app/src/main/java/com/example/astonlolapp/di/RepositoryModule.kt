@@ -16,6 +16,11 @@ import com.example.astonlolapp.domain.use_cases.onboarding_state.read_onboarding
 import com.example.astonlolapp.domain.use_cases.onboarding_state.save_onboarding.SaveOnboardingStateUseCase
 import com.example.astonlolapp.domain.use_cases.signed_in_state.read_signedin.ReadSignedInUseCase
 import com.example.astonlolapp.domain.use_cases.signed_in_state.save_signedin.SaveSignedInStateUseCase
+import com.example.astonlolapp.domain.use_cases.user.delete_user.DeleteUserUseCase
+import com.example.astonlolapp.domain.use_cases.user.get_user.GetUserUseCase
+import com.example.astonlolapp.domain.use_cases.user.sign_out.SignOutUseCase
+import com.example.astonlolapp.domain.use_cases.user.token_verification.TokeVerificationUseCase
+import com.example.astonlolapp.domain.use_cases.user.update_user.UpdateUserUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,7 +53,12 @@ object RepositoryModule {
             addHeroAsFavouriteUseCase = AddHeroAsFavouriteUseCase(repository = repository),
             updateHeroesUseCase = UpdateHeroesUseCase(repository = repository),
             saveSignedInStateUseCase = SaveSignedInStateUseCase(repository = repository),
-            readSignedInUseCase = ReadSignedInUseCase(repository = repository)
+            readSignedInUseCase = ReadSignedInUseCase(repository = repository),
+            deleteUserUseCase = DeleteUserUseCase(repository = repository),
+            updateInfo = UpdateUserUseCase(repository = repository),
+            signOutUseCase = SignOutUseCase(repository = repository),
+            getUseCase = GetUserUseCase(repository = repository),
+            tokenVerificationUseCase = TokeVerificationUseCase(repository = repository)
         )
     }
 
