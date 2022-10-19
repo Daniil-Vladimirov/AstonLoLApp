@@ -76,6 +76,7 @@ fun LoginScreen(
                 if (result) {
                     val intent = Intent(activity, MainActivity::class.java)
                     ContextCompat.startActivity(activity, intent, null)
+                    activity.finish()
                 } else {
                     viewModel.saveSingedInState(signedInState = false)
                 }
